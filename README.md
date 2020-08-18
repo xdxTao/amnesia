@@ -34,4 +34,4 @@ AmnesiaNotepad&nbsp;&nbsp;&nbsp;&nbsp;小程序代码
 
 **一个不务正业的程序员，梦想成为家庭煮夫。【终生学习者】**
 
-![https://www.xdx97.com:8185/api/preview?url=uploads/ARTICLE/root/article/2020-02-24/xdx_uaw2LQdiZc05WGqe.jpg](https://www.xdx97.com:8185/api/preview?url=uploads/ARTICLE/root/article/2020-02-24/xdx_uaw2LQdiZc05WGqe.jpg)
+- ![avatar](./other/preview.png)

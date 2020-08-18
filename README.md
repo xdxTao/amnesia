@@ -22,13 +22,17 @@
 ### 三、代码
 
 amnesia &nbsp;&nbsp;&nbsp;&nbsp;Java代码 <br/>
-AmnesiaNotepad&nbsp;&nbsp;&nbsp;&nbsp;小程序代码
+AmnesiaNotepad&nbsp;&nbsp;&nbsp;&nbsp;小程序代码 <br/>
+
+数据库文件存放在other文件夹
+
+clone下代码后，我们只需要在yml文件里面配置好自己的MySql，和Redis，还有自己小程序的appid和secret <br/>
 
 
 
 <br/><hr/><br/>
 
-
+**有疑问可以加我QQ：1140459171（备注GitHub）**<br/>
 
 **如果对你有帮助可以关注我的微信公众号**
 

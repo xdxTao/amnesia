@@ -23,9 +23,9 @@ spring:
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://47.100.60.252:9389/amnesia_notepad?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=UTC
-        username: root
-        password: das5a*^&565af
+        url: jdbc:mysql://xxxxxx:3306/amnesia_notepad?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=UTC
+        username: username
+        password: password
         dbcp2:
             min-idle: 5                                 # 数据库连接池最小维持连接数
             initial-size: 5                            # 初始连接数
@@ -36,9 +36,9 @@ spring:
     # redis配置
     redis:
         database: 2
-        host: 47.100.60.252
-        port: 8379
-        password: fdE#84K$EW~
+        host: ip
+        port: 6379
+        password: password
         timeout: 3000
         jedis:
             pool:
@@ -56,8 +56,8 @@ logging:
 
 # 微信小程序数据
 wx:
-    appid: wx1a39331e85e08267
-    secret: f2c71a773acccd9c4eb7889d7c2be50d
+    appid: 
+    secret: 
     grantType: authorization_code
     loginUrl: https://api.weixin.qq.com/sns/jscode2session
 

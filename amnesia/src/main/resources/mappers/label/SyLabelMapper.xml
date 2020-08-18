@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdx.mapper.label.SyLabelMapper">
+
+	<resultMap id="base_list" type="com.xdx.entitys.pojo.SyLabel">
+        <id column="label_id" jdbcType="INTEGER" property="labelId" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="label_name" jdbcType="VARCHAR" property="labelName" />
+        <result column="label_sort" jdbcType="TINYINT" property="labelSort" />
+        <result column="label_status" jdbcType="TINYINT" property="labelStatus" />
+        <result column="label_default" jdbcType="TINYINT" property="labelDefault" />
+	</resultMap>
+
+	<sql id="base_column_list">
+        ${base}.label_id,
+        ${base}.user_id,
+        ${base}.label_name,
+        ${base}.label_sort,
+        ${base}.label_status,
+        ${base}.label_default
+	</sql>
+
+    <insert id="addLabel" parameterType="java.util.Map">
+        INSERT INTO sy_label (user_id,label_name) VALUES (#{userId}, #{labelName})
+    </insert>
+
+    <delete id="deleteLabel" parameterType="java.util.Map">
+        DELETE FROM sy_label WHERE label_id # {labelId}
+    </delete>
+
+    <select id="list" parameterType="java.lang.String" resultMap="base_list">
+        SELECT
+          label_id,
+          user_id,
+          label_name,
+          label_sort,
+          label_status,
+          label_default
+        FROM sy_label
+        WHERE user_id = #{userId}
+        ORDER BY label_sort DESC
+    </select>
+
+    <update id="updateDefault" parameterType="java.lang.String">
+        <choose>
+            <when test="labelId != null and labelId != ''">
+                UPDATE sy_label SET label_default = 1 WHERE label_id = #{labelId}
+            </when>
+            <otherwise>
+                UPDATE sy_label SET label_default = 0 WHERE user_id = #{userId}
+            </otherwise>
+        </choose>
+    </update>
+
+    <select id="listAll" parameterType="java.lang.String" resultType="java.util.Map">
+        SELECT
+          label_id labelId,
+          label_name labelName
+        FROM
+            sy_label
+        WHERE
+            user_id = #{userId}
+            AND label_status = 1
+        ORDER BY
+            label_sort DESC
+    </select>
+
+
+</mapper>

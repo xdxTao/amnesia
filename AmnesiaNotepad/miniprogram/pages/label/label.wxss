@@ -1,0 +1,54 @@
+.table_title{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15rpx;
+    /* font-size: 3rpx; */
+    font-weight: 700;
+}
+.table_content{
+    display: flex;
+    justify-content: space-between;
+}
+switch{
+    /* zoom:0.6 */
+    transform:scale(0.6);
+}
+.content_sort{
+    margin-left: 15rpx;
+}
+input{
+    /* border: 1px gainsboro solid; */
+    width: 60rpx;
+    text-align: center;
+}
+
+
+/* 添加按钮 */
+.addButton image{
+    position: fixed;
+    bottom: 150px;
+    right: 40px;
+    width: 100rpx;
+    height: 100rpx;
+}
+/* 添加窗口 */
+.addWindow{
+    background-color: white;
+    position: fixed;
+    height: 500px;
+    width: 100%;
+    bottom: -500px;
+    padding-top: 10rpx;
+}
+.windowInput{
+    background-color: white;
+    border: 1px gainsboro solid;
+    height: 70rpx;
+    width: 100%;
+}
+/* 任务提交按钮 */
+.taskSubmit{
+    margin-top: 20rpx;
+    display: flex;
+    justify-content: flex-start;
+}

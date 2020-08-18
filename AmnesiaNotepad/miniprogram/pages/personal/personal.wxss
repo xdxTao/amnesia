@@ -1,0 +1,100 @@
+.main{
+	background-color: #f8f8f8;
+	height: 100vh;
+}
+.head{
+	height: 13vh;
+	/* border: 1px red solid; */
+	background-color: #fff;
+	display: flex;
+	padding-top: 20px;
+	justify-content: flex-start;
+	margin-bottom: 20rpx;
+}
+.head_left{
+	margin-left: 20rpx;
+	width: 120rpx;
+	height: 120rpx;
+}
+.head_left image{
+	width: 120rpx;
+	height: 120rpx;
+	border-radius: 6px;
+}
+.head_right{
+	width: 80%;
+	height: 120rpx;
+	/* border: 1px red solid; */
+	padding-left: 20rpx;
+}
+.head_right_1{
+	margin-top: 20rpx;
+	height: 50rpx;
+	font-size: 20px;
+	font-weight: 800;
+}
+.head_right_2{
+	margin-top: 10rpx;
+	height: 30rpx;
+	font-size: 14px;
+	color: gainsboro;
+}
+.box{
+	height: 7vh;
+	font-size: 14px;
+	padding-left: 20px;
+	border-bottom: 2rpx #f8f8f8 solid;
+	background-color: white;
+	display: flex;
+	justify-content: space-between;
+}
+.box_2{
+	padding-left: 19px;
+}
+.box_left{
+	display: flex;
+	justify-content: flex-start;
+}
+.box image{
+	padding-top: 25rpx;
+	margin-right: 12px;
+	width: 34rpx;
+	height: 34rpx;
+}
+.text{
+	padding-top: 23rpx;
+}
+.box_icon image{
+	padding-top: 30rpx;
+	width: 24rpx;
+	height: 24rpx;
+}
+.loginMain{
+	background-color: #fff;
+	height: 100vh; 
+}
+.login{
+	display: flex;
+	justify-content: center;
+}
+.loginButton{
+	margin-top: 200rpx;
+	color: white;
+}
+.loginDesc{
+	margin-top: 20rpx;
+	/* border: 1px red solid; */
+	color: gray;
+	text-align: center;
+}
+/* button{
+	font-size: 14px;
+	padding: 0;
+	font-weight: 150;
+	border: 1px white solid;
+} */
+button:not([size='mini']){
+
+	/* background-color: black; */
+	/* border: 1px white solid; */
+} 

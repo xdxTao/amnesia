@@ -1,0 +1,14 @@
+.explain_title{
+    padding-top: 25rpx;
+    padding-bottom: 25rpx;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+
+    border-bottom: 1px gainsboro solid;
+
+}
+.explain_desc{
+    font-size: 14px;
+    color: gray;
+}

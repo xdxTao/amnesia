@@ -1,0 +1,36 @@
+<!-- 说明部分 -->
+<view class="explain_title">
+    失忆的由来
+</view>
+<view class="explain_desc">
+    <text decode="{{true}}" >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;灵感来自2020年5月31日，这几天我一直有一些事情等待完成，但是总会忘记，所有想到做一个备忘录。
+    </text>
+     <text decode="{{true}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当然了，市面上的备忘录太多了，比如我一直用来记东西的日事清，最简单的也有手机备忘录，我也去查看了一些已经存在的类似小程序。 </text>
+
+    <text decode="{{true}}">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虽然它们都很不错，但是我觉得太复杂了，用来起来太重了，我要做一个轻量级的备忘录。当然了还有一个原因就是我一直想学习一下小程序，就这么失忆备忘录诞生了。
+    </text>
+</view>
+
+<view class="explain_title">
+    失忆的目的
+</view>
+<view class="explain_desc">
+    <text decode="{{true}}" >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;打造一个轻量级的备忘录，以最简单的方式，最少的代价记录你的日程。只提供当天的备忘录（也可以理解成当天的目标），新增一个任务之后不可以修改，并且点击完成之后，不可以再次回到未完成状态。
+    </text>
+    <text decode="{{true}}" >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户的数据（除了用户标识ID）,其它数据存在Redis里面，每天凌晨会删除前一天的数据。
+    </text>
+</view>
+
+<view class="explain_title">
+    其它
+</view>
+<view class="explain_desc">
+    <text decode="{{true}}" >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;失忆完全是一款没有经过调研、只经过个人简单的思考就开发出来的软件。只要我个人觉得有用就会一直维护下去，目前不考虑盈利。但如果觉得对你有帮助，可以进行少量的打赏，以激励我坚持维护下去。
+    </text>
+</view>
+<!-- 版本更新 -->

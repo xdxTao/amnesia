@@ -1,0 +1,39 @@
+{
+	"pages": [
+		"pages/task/task",
+		"pages/personal/personal",
+		"pages/author/author",
+		"pages/about/about",
+		"pages/help/help",
+		"pages/totalTask/totalTask",
+		"pages/label/label"
+	],
+	"window": {
+		"backgroundColor": "#F6F6F6",
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#F6F6F6",
+		"navigationBarTitleText": "失忆备忘录",
+		"navigationBarTextStyle": "black"
+	},
+	"tabBar": {
+		"selectedColor":"#1296db",
+		"list": [{
+		"pagePath": "pages/task/task",
+		"text": "今日任务",
+		"iconPath":"./images/today.png",
+		"selectedIconPath":"./images/today_select.png"
+		},{
+			"pagePath": "pages/totalTask/totalTask",
+			"text": "任务总览",
+			"iconPath":"./images/task.png",
+			"selectedIconPath":"./images/task_select.png"
+		},{
+		"pagePath": "pages/personal/personal",
+		"text": "个人中心",
+		"iconPath":"./images/personal.png",
+		"selectedIconPath":"./images/personal_select.png"
+		}]
+	},
+	"sitemapLocation": "sitemap.json",
+	"style": "v2"
+}

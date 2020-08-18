@@ -1,0 +1,5 @@
+.box{
+    padding-top: 50rpx;
+    padding-left: 50rpx;
+    padding-right: 50rpx;
+}

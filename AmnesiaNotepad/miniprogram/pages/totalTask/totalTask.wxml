@@ -1,0 +1,64 @@
+<!-- 标签 -->
+<view class="label">
+    <view
+        bindtap="changeLabel"
+        data-labelId="{{item.labelId}}"
+        class="{{selectLabelId == item.labelId ? 'labelBox_select' : 'labelBox'}}" 
+        wx:for="{{labelList}}"   wx:key="index">{{item.labelName}}
+    </view>
+</view>
+
+<!-- 空任务 -->
+<view class="empty" wx:if="{{isempty}}">
+    <image src="/images/empty.png"/>
+    生活不简单，尽量简单过。简单生活、慢生活、轻生活，均是一种生活态度，内心富有充盈，生活方能简单从容。
+</view>
+<!-- 数据部分 -->
+<view class="content" wx:else>
+   
+    <view class="box" wx:for="{{list}}"  wx:key="index">
+        <view class="left">
+            <checkbox disabled="{{item.taskSts == 1}}" data-id="{{item.taskId}}"  bindtap="completeTask" value="cb" color="#1296db" checked="{{item.taskSts == 1}}"/> 
+            <text bindtap="seeTaskDesc" 
+                data-desc="{{item.taskDesc}}" 
+                data-title="{{item.taskTitle}}" 
+                data-id="{{item.taskId}}"
+                data-type="{{item.taskSts}}"> {{item.taskTitle}} </text>
+        </view>
+        <!-- 切换到今日任务按钮 -->
+        <view class="right">
+            <image data-id="{{item.taskId}}" data-type="{{item.taskSts}}" bindtap="transfer" src="../../images/large.png" />
+        </view>
+    </view>
+
+</view>
+
+<!-- 弹出窗口 -->
+<view class="addWindow" animation="{{ani}}">
+    <input disabled="{{curSts == 1}}" class="taskInput" value="{{taskTitle}}" placeholder="任务标题..." bindinput='getTaskInput'/>
+    <view class='wrapper'>
+        <view class='toolbar' bindtap="format">
+            <i class="iconfont icon-zitijiacu {{formats.bold ? 'ql-active' : ''}}" data-name="bold"></i>
+            <i class="iconfont icon-zitixieti {{formats.italic ? 'ql-active' : ''}}" data-name="italic"></i>
+            <i class="iconfont icon-zitishanchuxian {{formats.strike ? 'ql-active' : ''}}" data-name="strike"></i>
+            <i class="iconfont icon-outdent" data-name="indent" data-value="-1"></i>
+            <i class="iconfont icon-indent" data-name="indent" data-value="+1"></i>
+            <i class="iconfont icon-fengexian" bindtap="insertDivider"></i>
+        </view>
+            <editor read-only="{{curSts == 1}}" id="editor" class="ql-container" placeholder="任务描述..." bindready="onEditorReady" bindinput='getTaskEditor'>
+            </editor>
+    </view>
+    <view class="taskSubmit">
+        <button wx:if="{{isEditor}}" type="primary" bindtap="addTask" style="color: #1296db; border:1px #1296db solid;"  plain="true">
+            提交 
+        </button>
+        <button wx:else type="primary" bindtap="updateTask" style="color: #1296db; border:1px #1296db solid;"  plain="true">
+            更新
+        </button>
+        <button type="default" bindtap="closeTask" plain="true">取消</button>
+    </view>
+
+</view>
+
+
+

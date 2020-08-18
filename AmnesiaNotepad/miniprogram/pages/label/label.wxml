@@ -1,0 +1,44 @@
+<!--标签管理页面-->
+<view class="table">
+    <view class="table_title">
+        <view class="table_name">标签名</view>
+        <view class="table_sort">排序</view>
+        <view class="table_show">是否显示</view>
+        <view class="table_default">是否默认</view>
+    </view>
+
+    <view class="table_content" wx:for="{{list}}"  wx:key="index">
+        <view bindtap="openTask" data-labelName="{{item.labelName}}" data-labelId="{{item.labelId}}" class="content_name" >{{item.labelName}}</view>
+        <view class="content_sort">
+            <input class="weui-input"  data-labelId="{{item.labelId}}" bindblur="changeSort" value="{{item.labelSort}}"/>
+        </view>
+        <view class="content_show">
+            <switch color="#1296db" checked="{{item.labelStatus == 1}}" data-labelId="{{item.labelId}}" bindchange="changeShow"/>
+        </view>
+        <view class="content_default">
+            <switch color="#1296db" data-labelId="{{item.labelId}}"  data-userId="{{item.userId}}" checked="{{item.labelDefault == 1}}" bindchange="changeDefault"/>
+        </view>
+    </view>
+
+</view>
+
+
+<!-- 添加部分 -->
+<!-- 添加按钮 -->
+<view class="addButton" data-labelName="" bindtap="openTask">
+    <image src="../../images/add.png" />
+</view>
+<!-- 弹出窗口 -->
+<view class="addWindow" animation="{{ani}}">
+    <input  class="windowInput" value="{{label}}" placeholder="请输入标签" bindinput='getLabelInput'/>
+    <view class="taskSubmit">
+        <button wx:if="{{!isEditor}}" type="primary" bindtap="addLabel" style="color: #1296db; border:1px #1296db solid;"  plain="true">
+            提交 
+        </button>
+        <button wx:else type="primary" bindtap="updateName" style="color: #1296db; border:1px #1296db solid;"  plain="true">
+            更新
+        </button>
+        <button type="default" bindtap="closeTask" plain="true">取消</button>
+    </view>
+
+</view>

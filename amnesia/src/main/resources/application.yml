@@ -1,0 +1,63 @@
+server:
+    port: 8081
+    servlet:
+        context-path: /api
+
+# https 配置
+#    ssl:
+#        key-store: /xdx/amnesia/amnesia.pfx
+#        key-store-password: wqp355Bp
+#        key-store-type: PKCS12
+
+
+mybatis:
+    type-aliases-package: com.xdx.entitys         # 所有Entity别名类所在包
+
+
+mybatis-plus:
+    type-handlers-package: com.xdx.common.handler           # 处理器配置
+    mapper-locations: classpath:mappers/**/*Mapper.xml      # mapper映射文件 - classpath:mybatis/mapper/**/*.xml
+
+
+spring:
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://47.100.60.252:9389/amnesia_notepad?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=UTC
+        username: root
+        password: das5a*^&565af
+        dbcp2:
+            min-idle: 5                                 # 数据库连接池最小维持连接数
+            initial-size: 5                            # 初始连接数
+            max-total: 5                               # 最大连接数
+            max-wait-millis: 200                      # 等待链接获取的最大超时时间
+    main:
+        allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
+    # redis配置
+    redis:
+        database: 2
+        host: 47.100.60.252
+        port: 8379
+        password: fdE#84K$EW~
+        timeout: 3000
+        jedis:
+            pool:
+                max-active: 8
+                max-idle: 8
+                max-wait: -1
+                min-idle: 0
+# 开启MyBatis打印日志
+logging:
+    level:
+        com.xdx.mapper: debug
+
+
+
+
+# 微信小程序数据
+wx:
+    appid: wx1a39331e85e08267
+    secret: f2c71a773acccd9c4eb7889d7c2be50d
+    grantType: authorization_code
+    loginUrl: https://api.weixin.qq.com/sns/jscode2session
+

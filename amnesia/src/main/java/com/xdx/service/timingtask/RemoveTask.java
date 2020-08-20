@@ -26,18 +26,21 @@ public class RemoveTask {
 //    @Scheduled(fixedRate = 1000 * 600)
     public void remove(){
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println(df.format(new Date()));
+        System.out.println(df.format(new Date()) + "  定时任务清空已完成数据");
         Set<Serializable> keys = CacheContext.getKeys();
         for (Serializable key : keys){
-            List<SyTask> list = (List<SyTask>)CacheContext.get(key.toString());
-            List<SyTask> newLists = new ArrayList<>();
-            for (int i = 0;i < list.size(); i++){
-                if (list.get(i).getTaskSts() != YesOrNoStatusEnum.YES){
-                    list.get(i).setTaskType(TaskTypeEnum.TOTAL);
-                    newLists.add(list.get(i));
+            // 任务数据的key是以task结尾的
+            if (key.toString().endsWith("task")){
+                List<SyTask> list = (List<SyTask>)CacheContext.get(key.toString());
+                List<SyTask> newLists = new ArrayList<>();
+                for (int i = 0;i < list.size(); i++){
+                    if (list.get(i).getTaskSts() != YesOrNoStatusEnum.YES){
+                        list.get(i).setTaskType(TaskTypeEnum.TOTAL);
+                        newLists.add(list.get(i));
+                    }
                 }
+                CacheContext.set(key.toString(),newLists, 60*24*365);
             }
-            CacheContext.set(key.toString(),newLists, 60*24*365);
         }
     }
 

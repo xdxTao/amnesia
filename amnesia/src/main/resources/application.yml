@@ -56,8 +56,8 @@ logging:
 
 # 微信小程序数据
 wx:
-    appid: 
-    secret: 
+    appid:
+    secret:
     grantType: authorization_code
     loginUrl: https://api.weixin.qq.com/sns/jscode2session
 

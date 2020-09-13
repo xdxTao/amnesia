@@ -1,15 +1,16 @@
 package com.xdx.common.utils;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.ParseException;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -52,6 +53,31 @@ public class HttpClient {
             }
         }
         return result;
+    }
+
+    /**
+     * post 请求
+     */
+    public static String post(String url,Map<String,String> params) throws Exception{
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost(url);
+        httpPost.addHeader("Content-type","application/json; charset=utf-8");
+        httpPost.setHeader("Accept", "application/json");
+        if (params != null && params.size() > 0){
+            StringEntity stringEntity = new StringEntity(JsonUtils.objectToJson(params),"utf-8");
+            httpPost.setEntity(stringEntity);
+        }
+        CloseableHttpResponse response = null;
+        try {
+            // 执行请求
+            response = httpclient.execute(httpPost);
+            return EntityUtils.toString(response.getEntity(), "UTF-8");
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+            httpclient.close();
+        }
     }
 
 }

@@ -4,28 +4,69 @@
 </view>
 <!-- 空任务 -->
 <view class="empty" wx:if="{{isempty}}">
-    <image src="/images/empty.png"/>
+    <image src="/images/empty.png" />
     生活不简单，尽量简单过。简单生活、慢生活、轻生活，均是一种生活态度，内心富有充盈，生活方能简单从容。
 </view>
 <!-- 数据部分 -->
 <view class="content" wx:else>
-   
-    <view class="box" wx:for="{{list}}"  wx:key="index">
-        <view class="left">
-            <checkbox disabled="{{item.taskSts == 1}}" data-id="{{item.taskId}}"  bindtap="completeTask" value="cb" color="#1296db" checked="{{item.taskSts == 1}}"/> 
-            <text bindtap="seeTaskDesc" 
-                data-id="{{item.taskId}}" 
-                data-desc="{{item.taskDesc}}" 
-                data-labelId="{{item.labelId}}" 
-                data-title="{{item.taskTitle}}"
-                data-type="{{item.taskSts}}"
-                > {{item.taskTitle}} </text>
-        </view>
-        <!-- 切换到任务总览按钮 -->
-        <view class="right" > 
-            <image data-id="{{item.taskId}}"  data-type="{{item.taskSts}}"  bindtap="transfer" src="../../images/large.png" />
-        </view>
-    </view>
+    <movable-area class='movable-area'
+        style='display:{{movableViewInfo.showClass}}; height:{{pageInfo.scrollHeight}}%;'>
+        <movable-view class="list movable-row " out-of-bounds='true' damping='999'
+            style='width: 100%; height:{{pageInfo.rowHeight}}px;' direction="vertical" y="{{movableViewInfo.y}}">
+            <view class="box">
+                <view class="left">
+                    <checkbox disabled="{{movableViewInfo.data.taskSts == 1}}" data-id="{{item.taskId}}"
+                        bindtap="completeTask" value="cb" color="#1296db"
+                        checked="{{movableViewInfo.data.taskSts == 1}}" />
+                    <text bindtap="seeTaskDesc"> {{movableViewInfo.data.taskTitle}} </text>
+                </view>
+                <view class=".operator">
+                    <!-- 拖动按钮 -->
+                    <view class="sort">
+                        <image  color='Gray' size='20' 
+                        src="../../images/sort.png"/>
+                    </view>
+                    <!-- 切换到任务总览按钮 -->
+                    <view class="right">
+                        <image data-id="{{item.taskId}}" data-type="{{item.taskSts}}" bindtap="transfer"
+                            src="../../images/large.png" />
+                    </view>
+                </view>
+            </view>
+        </movable-view>
+    </movable-area>
+    <scroll-view scroll-y='{{pageInfo.scrollY}}' style='height: {{pageInfo.scrollHeight}}%'>
+        <block wx:for='{{list}}'>
+            <view class='list {{pageInfo.readyPlaceIndex == index ? "ready-place" : ""}}'
+                style='height: {{pageInfo.rowHeight}}px;'>
+                <view class="box">
+                    <view class="left">
+                        <checkbox disabled="{{item.taskSts == 1}}" data-id="{{item.taskId}}" bindtap="completeTask"
+                            value="cb" color="#1296db" checked="{{item.taskSts == 1}}" />
+                        <text bindtap="seeTaskDesc" data-id="{{item.taskId}}" data-desc="{{item.taskDesc}}"
+                            data-labelId="{{item.labelId}}" data-title="{{item.taskTitle}}"
+                            data-type="{{item.taskSts}}"> {{item.taskTitle}} </text>
+                    </view>
+                    <view class=".operator">
+                        <!-- 拖动按钮 -->
+                        <view class="sort">
+                            <image  color='Gray' 
+                            data-index='{{index}}' 
+                            bindtouchstart='dragStart'
+                            bindtouchmove='dragMove'
+                            bindtouchend='dragEnd'
+                            src="../../images/sort.png"/>
+                        </view>
+                        <!-- 切换到任务总览按钮 -->
+                        <view class="right">
+                            <image data-id="{{item.taskId}}" data-type="{{item.taskSts}}" bindtap="transfer"
+                                src="../../images/large.png" />
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </scroll-view>
 
 </view>
 
@@ -36,7 +77,8 @@
 </view>
 <!-- 弹出窗口 -->
 <view class="addWindow" animation="{{ani}}">
-    <input disabled="{{curSts == 1}}"  class="taskInput" value="{{taskTitle}}" placeholder="任务标题..." bindinput='getTaskInput'/>
+    <input disabled="{{curSts == 1}}" class="taskInput" value="{{taskTitle}}" placeholder="任务标题..."
+        bindinput='getTaskInput' />
     <view class='wrapper'>
         <view class='toolbar' bindtap="format">
             <i class="iconfont icon-zitijiacu {{formats.bold ? 'ql-active' : ''}}" data-name="bold"></i>
@@ -46,23 +88,24 @@
             <i class="iconfont icon-indent" data-name="indent" data-value="+1"></i>
             <i class="iconfont icon-fengexian" bindtap="insertDivider"></i>
         </view>
-            <editor read-only="{{curSts == 1}}" id="editor" class="ql-container" placeholder="任务描述..." bindready="onEditorReady" bindinput='getTaskEditor'>
-            </editor>
-            <!-- 标签 -->
+        <editor read-only="{{curSts == 1}}" id="editor" class="ql-container" placeholder="任务描述..."
+            bindready="onEditorReady" bindinput='getTaskEditor'>
+        </editor>
+        <!-- 标签 -->
         <view class="label">
-            <view
-                bindtap="changeLabel" 
-                data-labelId="{{item.labelId}}"
-                class="{{selectLabelId == item.labelId ? 'labelBox_select' : 'labelBox'}}" 
-                wx:for="{{labelList}}"   wx:key="index">{{item.labelName}}
+            <view bindtap="changeLabel" data-labelId="{{item.labelId}}"
+                class="{{selectLabelId == item.labelId ? 'labelBox_select' : 'labelBox'}}" wx:for="{{labelList}}"
+                wx:key="index">{{item.labelName}}
             </view>
         </view>
     </view>
     <view class="taskSubmit">
-        <button wx:if="{{!isEditor}}" type="primary" bindtap="addTask" style="color: #1296db; border:1px #1296db solid;"  plain="true">
-            提交 
+        <button wx:if="{{!isEditor}}" type="primary" bindtap="addTask" style="color: #1296db; border:1px #1296db solid;"
+            plain="true">
+            提交
         </button>
-        <button wx:else type="primary" bindtap="updateTask" style="color: #1296db; border:1px #1296db solid;"  plain="true">
+        <button wx:else type="primary" bindtap="updateTask" style="color: #1296db; border:1px #1296db solid;"
+            plain="true">
             更新
         </button>
         <button type="default" bindtap="closeTask" plain="true">取消</button>

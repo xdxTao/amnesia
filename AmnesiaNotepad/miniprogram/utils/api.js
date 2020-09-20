@@ -2,7 +2,6 @@ import apiRequest from './request.js';
 // const HOST = 'http://127.0.0.1:8081/api/';
 // 真机测试需要用这个ip
 // const HOST = 'http://192.168.16.106:8081/api/'
-const HOST = 'https://amnesia.xdx97.com:8081/api/'
 import { store } from '../store'
 const API_LIST = {
     // 登录
@@ -84,6 +83,16 @@ const API_LIST = {
     getDefaultLabel:{
         method: 'POST',
         url: 'label/getDefaultLabel'
+    },
+    // 标签拖动排序
+    labelSort:{
+        method: 'POST',
+        url: 'label/sort'
+    },
+    // 任务拖动排序
+    taskSort:{
+        method: 'POST',
+        url: 'task/sort'
     },
     
 }

@@ -1,7 +1,10 @@
 package com.xdx.controller.task;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.xdx.common.common.AjaxResult;
+import com.xdx.common.utils.JsonUtils;
 import com.xdx.entitys.dto.SyTask;
+import com.xdx.entitys.pojo.SyLabel;
 import com.xdx.service.task.SyTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -68,6 +71,16 @@ public class SyTaskController {
             return AjaxResult.failure("确少参数:taskId");
         }
         return taskService.transfer(taskId);
+    }
+
+    /**
+     * 任务排序
+     */
+    @PostMapping("/task/sort")
+    public AjaxResult<?> taskSort(@RequestBody Object sortList){
+        JsonNode jsonNode = JsonUtils.stringToJsonNode(JsonUtils.objectToJson(sortList));
+        List<SyTask> syTasks = JsonUtils.objectToList(jsonNode.get("sortList"), SyTask.class);
+        return taskService.taskSort(syTasks);
     }
 
 }

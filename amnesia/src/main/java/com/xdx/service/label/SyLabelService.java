@@ -3,6 +3,7 @@ package com.xdx.service.label;
 import com.xdx.common.common.AjaxResult;
 import com.xdx.entitys.pojo.SyLabel;
 
+import java.util.List;
 import java.util.Map;
 
 public interface SyLabelService {
@@ -41,4 +42,9 @@ public interface SyLabelService {
      * 获取默认标签Id
      */
     AjaxResult<?> getDefaultLabel();
+
+    /**
+     * 标签排序
+     */
+    AjaxResult<?> sortLabel(List<SyLabel> sortList);
 }

@@ -137,6 +137,25 @@ public class SyTaskServiceImpl extends MyCommonService implements SyTaskService 
         return AjaxResult.success("操作完成");
     }
 
+    /**
+     * 任务排序
+     */
+    @Override
+    public AjaxResult<?> taskSort(List<SyTask> syTasks) {
+
+        TaskTypeEnum type = syTasks.get(0).getTaskType();
+        List<SyTask> otherList = new ArrayList<>();
+        List<SyTask> allList = getTaskList();
+        for (SyTask task : allList){
+            if (task.getTaskType() != type){
+                otherList.add(task);
+            }
+        }
+        syTasks.addAll(otherList);
+        CacheContext.set(getToken() + "task",syTasks, 60*24*365);
+        return AjaxResult.success("操作完成");
+    }
+
 
     /**
      * 获取当前用户的任务数据列表

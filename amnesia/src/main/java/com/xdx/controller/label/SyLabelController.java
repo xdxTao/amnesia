@@ -1,7 +1,9 @@
 package com.xdx.controller.label;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.xdx.common.common.AjaxResult;
 import com.xdx.common.utils.CheckParams;
+import com.xdx.common.utils.JsonUtils;
 import com.xdx.entitys.pojo.SyLabel;
 import com.xdx.service.label.SyLabelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -94,4 +97,15 @@ public class SyLabelController {
     public AjaxResult<?> getDefaultLabel(){
         return syLabelService.getDefaultLabel();
     }
+
+    /**
+     * 标签排序
+     */
+    @PostMapping("/label/sort")
+    public AjaxResult<?> sortLabel(@RequestBody Object sortList){
+        JsonNode jsonNode = JsonUtils.stringToJsonNode(JsonUtils.objectToJson(sortList));
+        List<SyLabel> syLabels = JsonUtils.objectToList(jsonNode.get("sortList"), SyLabel.class);
+        return syLabelService.sortLabel(syLabels);
+    }
+
 }

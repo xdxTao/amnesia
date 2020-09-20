@@ -31,4 +31,9 @@ public interface SyTaskService {
      * 任务转移
      */
     AjaxResult<?> transfer(String taskId);
+
+    /**
+     * 任务排序
+     */
+    AjaxResult<?> taskSort(List<SyTask> syTasks);
 }

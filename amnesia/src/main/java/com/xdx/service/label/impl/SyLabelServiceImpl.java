@@ -115,4 +115,19 @@ public class SyLabelServiceImpl extends MyCommonService implements SyLabelServic
         }
         return AjaxResult.success((Object) labelId);
     }
+
+    /**
+     * 标签排序
+     */
+    @Override
+    public AjaxResult<?> sortLabel(List<SyLabel> sortList) {
+        SyLabel update = new SyLabel();
+        int lenght = sortList.size();
+        for (int i = 0;i < sortList.size(); i++){
+            update.setLabelId(sortList.get(i).getLabelId());
+            update.setLabelSort(lenght - i);
+            labelMapper.updateById(update);
+        }
+        return AjaxResult.success("操作成功");
+    }
 }

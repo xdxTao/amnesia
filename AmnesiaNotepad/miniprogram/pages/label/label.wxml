@@ -1,24 +1,63 @@
 <!--标签管理页面-->
 <view class="table">
-    <view class="table_title">
+    <view class='table_title' style='height: {{pageInfo.rowHeight}}px;'>
         <view class="table_name">标签名</view>
-        <view class="table_sort">排序</view>
         <view class="table_show">是否显示</view>
         <view class="table_default">是否默认</view>
+        <view class="table_sort">排序</view>
     </view>
 
-    <view class="table_content" wx:for="{{list}}"  wx:key="index">
-        <view bindtap="openTask" data-labelName="{{item.labelName}}" data-labelId="{{item.labelId}}" class="content_name" >{{item.labelName}}</view>
-        <view class="content_sort">
-            <input class="weui-input"  data-labelId="{{item.labelId}}" bindblur="changeSort" value="{{item.labelSort}}"/>
-        </view>
-        <view class="content_show">
-            <switch color="#1296db" checked="{{item.labelStatus == 1}}" data-labelId="{{item.labelId}}" bindchange="changeShow"/>
-        </view>
-        <view class="content_default">
-            <switch color="#1296db" data-labelId="{{item.labelId}}"  data-userId="{{item.userId}}" checked="{{item.labelDefault == 1}}" bindchange="changeDefault"/>
-        </view>
-    </view>
+    <movable-area class='movable-area'
+        style='display:{{movableViewInfo.showClass}}; height:{{pageInfo.scrollHeight}}%;'>
+        <movable-view class="list movable-row " out-of-bounds='true' damping='999'
+            style='width: 100%; height:{{pageInfo.rowHeight}}px;' direction="vertical" y="{{movableViewInfo.y}}">
+            <view class="table_content">
+                <view class="content_name" data-labelName="{{movableViewInfo.data.labelName}}"
+                    data-labelId="{{movableViewInfo.data.labelId}}">{{movableViewInfo.data.labelName}}</view>
+                <view class="content_show">
+                    <switch color="#1296db" checked="{{movableViewInfo.data.labelStatus == 1}}"
+                        data-labelId="{{movableViewInfo.data.labelId}}" bindchange="changeShow" />
+                </view>
+                <view class="content_default">
+                    <switch color="#1296db" data-labelId="{{movableViewInfo.data.labelId}}"
+                        data-userId="{{movableViewInfo.data.userId}}"
+                        checked="{{movableViewInfo.data.labelDefault == 1}}" bindchange="changeDefault" />
+                </view>
+                <view class="content_sort">
+                    <!-- <input class="weui-input"  data-labelId="{{item.labelId}}" bindblur="changeSort" value="{{item.labelSort}}"/> -->
+                    <image color='Gray'
+                        src="../../images/sort.png"/>
+                </view>
+            </view>
+        </movable-view>
+    </movable-area>
+    <scroll-view scroll-y='{{pageInfo.scrollY}}' style='height: {{pageInfo.scrollHeight}}%'>
+        <block wx:for='{{list}}'>
+            <view class='list {{pageInfo.readyPlaceIndex == index ? "ready-place" : ""}}'
+                style='height: {{pageInfo.rowHeight}}px;'>
+                <view class="table_content">
+                    <view bindtap="openTask" data-labelName="{{item.labelName}}" data-labelId="{{item.labelId}}"
+                        class="content_name">{{item.labelName}}</view>
+                    <view class="content_show">
+                        <switch color="#1296db" checked="{{item.labelStatus == 1}}" data-labelId="{{item.labelId}}"
+                            bindchange="changeShow" />
+                    </view>
+                    <view class="content_default">
+                        <switch color="#1296db" data-labelId="{{item.labelId}}" data-userId="{{item.userId}}"
+                            checked="{{item.labelDefault == 1}}" bindchange="changeDefault" />
+                    </view>
+                    <view class="content_sort">
+                        <image type='download' color='Gray'
+                        data-index='{{index}}' 
+                        bindtouchstart='dragStart'
+                        bindtouchmove='dragMove' 
+                        bindtouchend='dragEnd' 
+                        src="../../images/sort.png"/>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </scroll-view>
 
 </view>
 
@@ -30,12 +69,14 @@
 </view>
 <!-- 弹出窗口 -->
 <view class="addWindow" animation="{{ani}}">
-    <input  class="windowInput" value="{{label}}" placeholder="请输入标签" bindinput='getLabelInput'/>
+    <input class="windowInput" value="{{label}}" placeholder="请输入标签" bindinput='getLabelInput' />
     <view class="taskSubmit">
-        <button wx:if="{{!isEditor}}" type="primary" bindtap="addLabel" style="color: #1296db; border:1px #1296db solid;"  plain="true">
-            提交 
+        <button wx:if="{{!isEditor}}" type="primary" bindtap="addLabel"
+            style="color: #1296db; border:1px #1296db solid;" plain="true">
+            提交
         </button>
-        <button wx:else type="primary" bindtap="updateName" style="color: #1296db; border:1px #1296db solid;"  plain="true">
+        <button wx:else type="primary" bindtap="updateName" style="color: #1296db; border:1px #1296db solid;"
+            plain="true">
             更新
         </button>
         <button type="default" bindtap="closeTask" plain="true">取消</button>

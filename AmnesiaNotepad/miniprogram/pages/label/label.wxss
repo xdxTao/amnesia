@@ -1,38 +1,78 @@
-.table_title{
+.table{
+    margin-left: 2%;
+    margin-right: 2%;
+    height: 500rpx;
+}
+.table_title {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15rpx;
     /* font-size: 3rpx; */
     font-weight: 700;
+    width: 100%;
 }
-.table_content{
+
+.list {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15rpx;
+    width: 100%;
+}
+
+.movable-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+}
+
+.movable-row {
+    box-shadow: #D9D9D9 0px 0px 20px;
+    width: 100%;
+}
+
+.table_content {
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
-switch{
+
+switch {
     /* zoom:0.6 */
-    transform:scale(0.6);
+    transform: scale(0.6);
 }
-.content_sort{
+
+.content_sort {
     margin-left: 15rpx;
 }
-input{
+
+.content_sort image{
+    margin-top: 7px;
+    width: 40rpx;
+    padding-left: 20rpx;
+    height: 40rpx;
+}
+
+input {
     /* border: 1px gainsboro solid; */
     width: 60rpx;
     text-align: center;
 }
 
 
+
 /* 添加按钮 */
-.addButton image{
+.addButton image {
     position: fixed;
     bottom: 150px;
     right: 40px;
     width: 100rpx;
     height: 100rpx;
 }
+
 /* 添加窗口 */
-.addWindow{
+.addWindow {
     background-color: white;
     position: fixed;
     height: 500px;
@@ -40,14 +80,16 @@ input{
     bottom: -500px;
     padding-top: 10rpx;
 }
-.windowInput{
+
+.windowInput {
     background-color: white;
     border: 1px gainsboro solid;
     height: 70rpx;
     width: 100%;
 }
+
 /* 任务提交按钮 */
-.taskSubmit{
+.taskSubmit {
     margin-top: 20rpx;
     display: flex;
     justify-content: flex-start;

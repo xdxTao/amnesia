@@ -4,19 +4,24 @@
 /** 标签部分 */
 .label {
     height: 80rpx;
-    /* border: 1px red solid; */
+    /* border: 1px blue solid; */
     width: 96%;
     margin-left: 2%;
     border-bottom: 1rpx #f8f8f8 solid;
     display: flex;
-    margin-top: 15rpx;
+    /* margin-top: 2rpx; */
     justify-content: flex-start;
+    position:fixed;
+    top:0;
+    z-index: 99;
+    background-color: white;
 }
 
 .labelBox {
     width: 15%;
     border: 1rpx gainsboro solid;
     margin-left: 4%;
+    margin-top: 10rpx;
     height: 60rpx;
     text-align: center;
     border-radius: 100rpx;
@@ -29,6 +34,7 @@
     border: 1rpx #1296db solid;
     height: 60rpx;
     margin-left: 4%;
+    margin-top: 10rpx;
     text-align: center;
     border-radius: 100rpx;
     line-height: 60rpx;
@@ -61,10 +67,11 @@
 .content {
     /* border: 1px red solid; */
     padding-left: 30rpx;
+    margin-top: 100rpx;
 }
 
 .box {
-    margin-top: 2%;
+    /* margin-top: 2%; */
     width: 96%;
     float: left;
     /* border: 1px red solid; */
@@ -90,6 +97,8 @@
     width: 40rpx;
     padding-left: 20rpx;
     height: 40rpx;
+    margin-top: 8rpx; 
+    
 }
 
 /* 切换到任务总览 */
@@ -97,6 +106,7 @@
     width: 33rpx;
     padding-left: 20rpx;
     height: 33rpx;
+    margin-top: 8rpx; 
 }
 
 .right image {

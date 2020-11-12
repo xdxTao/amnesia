@@ -1,7 +1,7 @@
 import apiRequest from './request.js';
-// const HOST = 'http://127.0.0.1:8081/api/';
+const HOST = 'http://127.0.0.1:8082/api/';
 // 真机测试需要用这个ip
-// const HOST = 'http://192.168.16.106:8081/api/'
+// const HOST = 'http://192.168.12.123:8082/api/'
 import { store } from '../store'
 const API_LIST = {
     // 登录
@@ -9,25 +9,15 @@ const API_LIST = {
         method: 'GET',
         url: 'user/login'
     },
-    // 判断是否授权
-    isAuthorize:{
-        method: 'GET',
-        url: 'user/isAuthorize'
-    },
-    // 用户授权
-    authorize:{
-        method: 'GET',
-        url: 'user/authorize'
-    },
-    // 同步授权
-    synAuthorize:{
-        method: 'GET',
-        url: 'user/synAuthorize'
-    },
     // 获取用户编号
     userNumber:{
         method: 'GET',
         url: 'user/userNumber'
+    },
+    // 使用帮助已读
+    completeHelpRead:{
+        method: 'GET',
+        url: 'user/completeHelpRead'
     },
     // 获取任务列表数据
     taskList:{

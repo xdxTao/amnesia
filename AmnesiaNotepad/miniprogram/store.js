@@ -10,11 +10,9 @@ import {
 // });
 
 export const store = observable({
-    isAuthorize: false,
     token: '',
-    requestPrefix:'http://127.0.0.1:8080/api/',
     // actions
     update: action(function () {
-        this.isAuthorize = true
+   
     })
 })

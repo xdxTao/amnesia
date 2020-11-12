@@ -18,9 +18,6 @@ public class SyUserController {
 
     /**
      * 用户登录
-     *
-     * @param code
-     * @return
      */
     @GetMapping("/user/login")
     public AjaxResult<?> login(@RequestParam String code){
@@ -31,21 +28,11 @@ public class SyUserController {
     }
 
     /**
-     * 判断用户是否授权
+     * 修改用户使用阅读
      */
-    @GetMapping("/user/isAuthorize")
-    public AjaxResult<?> isAuthorize(){
-
-        return syUserService.isAuthorize();
-    }
-
-    /**
-     * 用户授权
-     */
-    @GetMapping("/user/authorize")
-    public AjaxResult<?> authorize(){
-
-        return syUserService.authorize();
+    @GetMapping("/user/completeHelpRead")
+    public AjaxResult<?> completeHelpRead(){
+        return syUserService.completeHelpRead();
     }
 
     /**
@@ -53,19 +40,6 @@ public class SyUserController {
      */
     @GetMapping("/user/userNumber")
     public AjaxResult<?> userNumber(){
-
         return syUserService.userNumber();
     }
-
-    /**
-     * 同步授权状态
-     */
-    @GetMapping("/user/synAuthorize")
-    public AjaxResult<?> synAuthorize(Boolean authorize){
-        if (authorize == null){
-            return AjaxResult.failure("系统错误");
-        }
-        return syUserService.synAuthorize(authorize);
-    }
-
 }

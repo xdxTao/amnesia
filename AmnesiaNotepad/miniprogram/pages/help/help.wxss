@@ -1,5 +1,28 @@
 .box{
-    padding-top: 50rpx;
-    padding-left: 50rpx;
-    padding-right: 50rpx;
+    /* padding-top: 40rpx; */
+    /* padding-left: 11%; */
+    /* padding-right: 10%; */
+    /* display: flex;
+    justify-content: center; */
+}
+.content{
+ 
+}
+.title1{
+    width: 90%;
+    margin-left: 5%;
+    font-size: 16px;
+}
+.title{
+    width: 90%;
+    margin-left: 5%;
+    font-size: 16px;
+    margin-top: 100rpx;
+}
+.image{
+    margin-top: 30rpx;
+    margin-left: 5%;
+    width: 90%;
+    height: 1200rpx;
+
 }

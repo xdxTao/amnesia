@@ -47,4 +47,9 @@ public class SyUser  {
      */
     private String userRemarks;
 
+    /**
+     * 使用帮助是否阅读 1 已经阅读
+     */
+    private Integer helpRead;
+
 }

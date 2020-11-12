@@ -29,9 +29,8 @@ public class WebAppConfig implements WebMvcConfigurer {
         registry.addInterceptor(getLoginInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/user/login",
-                        "/user/isAuthorize",
-                        "/user/authorize",
-                        "/user/synAuthorize",
-                        "/task/test");
+                        "/xdx/test",
+                        "/task/test",
+                        "/download");
     }
 }

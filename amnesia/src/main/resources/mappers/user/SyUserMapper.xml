@@ -9,6 +9,7 @@
         <result column="is_authorize" jdbcType="TINYINT" property="isAuthorize" />
         <result column="gender" jdbcType="TINYINT" property="gender" />
         <result column="user_remarks" jdbcType="VARCHAR" property="userRemarks" />
+        <result column="help_read" jdbcType="INTEGER" property="helpRead" />
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -17,7 +18,8 @@
         user_status,
         is_authorize,
         gender,
-        user_remarks
+        user_remarks,
+        help_read
     </sql>
 
 

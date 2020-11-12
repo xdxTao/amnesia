@@ -4,37 +4,40 @@ import com.xdx.common.common.AjaxResult;
 import com.xdx.common.common.MyCommonService;
 import com.xdx.common.enums.TaskTypeEnum;
 import com.xdx.common.enums.YesOrNoStatusEnum;
-import com.xdx.common.utils.UUIDUtils;
-import com.xdx.common.utils.redis.CacheContext;
-import com.xdx.entitys.dto.SyTask;
+import com.xdx.entitys.pojo.SyTask;
+import com.xdx.mapper.task.SyTaskMapper;
 import com.xdx.service.task.SyTaskService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class SyTaskServiceImpl extends MyCommonService implements SyTaskService {
 
+    private final static Logger logger = LoggerFactory.getLogger(SyTaskServiceImpl.class);
+
+
+    @Autowired
+    private SyTaskMapper taskMapper;
+
     @Override
     public AjaxResult<?> add(SyTask task) {
-        String key = getToken() + "task";
-        // 1、取出之前的数据
-        List<SyTask> list = getTaskList();
 
-        // 2、
-        if (list == null){
-            list = new ArrayList<>();
+        task.setTaskDel(YesOrNoStatusEnum.NO);
+        task.setCreateTime(new Date());
+        task.setTaskSts(YesOrNoStatusEnum.NO);
+        task.setUserId(getCurUser().getUserId());
+        task.setTaskType(TaskTypeEnum.TODAY);
+        Integer maxSort = taskMapper.selectMaxSort(task.getUserId());
+        if (maxSort == null){
+            maxSort = 0;
         }
-
-        // 3、新增数据
-        task.setTaskId(UUIDUtils.getUUID())
-                .setTaskSts(YesOrNoStatusEnum.NO)
-                .setTaskType(TaskTypeEnum.TODAY);
-        list.add(task);
-
-        // 4、数据存入redis
-        CacheContext.set(key, list, 60*24*365);
+        task.setTaskSort(maxSort + 1);
+        taskMapper.insert(task);
         return AjaxResult.success("新增成功");
     }
 
@@ -43,32 +46,17 @@ public class SyTaskServiceImpl extends MyCommonService implements SyTaskService 
      */
     @Override
     public AjaxResult<List<SyTask>> list(Integer taskType,Integer labelId) {
-        List<SyTask> taskList = getTaskList();
-        if (taskList == null){
-            return AjaxResult.success();
-        }
-        List<SyTask> lits1 = new ArrayList<>();
-        List<SyTask> lits2 = new ArrayList<>();
-        for (SyTask item : taskList){
-            if (item.getTaskType().getCode().equals(taskType)){
-                if (item.getTaskSts() == YesOrNoStatusEnum.YES){
-                    lits2.add(item);
-                }else {
-                    lits1.add(item);
-                }
-            }
-        }
-        lits1.addAll(lits2);
-        if (labelId != null){
-            List<SyTask> lits3 = new ArrayList<>();
-            for (SyTask item : lits1){
-                if (labelId.equals(item.getLabelId())){
-                    lits3.add(item);
-                }
-            }
-            return AjaxResult.success(lits3);
-        }
-        return AjaxResult.success(lits1);
+        SyTask select = new SyTask();
+        select.setUserId(getCurUser().getUserId());
+        select.setTaskType(taskType == 0 ? TaskTypeEnum.TODAY : TaskTypeEnum.TOTAL);
+        select.setLabelId(labelId);
+        select.setTaskDel(YesOrNoStatusEnum.NO);
+        select.setTaskSts(YesOrNoStatusEnum.NO);
+        List<SyTask> list1 = taskMapper.selectList(select,"asc","task_sort");
+        select.setTaskSts(YesOrNoStatusEnum.YES);
+        List<SyTask> list2 =  taskMapper.selectList(select,"asc","task_sort");
+        list1.addAll(list2);
+        return AjaxResult.success(list1);
     }
 
     /**
@@ -76,24 +64,7 @@ public class SyTaskServiceImpl extends MyCommonService implements SyTaskService 
      */
     @Override
     public AjaxResult<?> update(SyTask task){
-        List<SyTask> list = getTaskList();
-        if (list == null){
-            return AjaxResult.failure("系统错误!");
-        }
-        String taskId = task.getTaskId();
-        for (int i = 0;i < list.size(); i++){
-            if (taskId.equals(list.get(i).getTaskId())){
-                if (list.get(i).getTaskSts() == YesOrNoStatusEnum.YES){
-                    return AjaxResult.failure("已完成任务不支持更新");
-                }
-                list.get(i).setTaskTitle(task.getTaskTitle())
-                        .setTaskDesc(task.getTaskDesc());
-                if (list.get(i).getTaskType() == TaskTypeEnum.TODAY){
-                    list.get(i).setLabelId(task.getLabelId());
-                }
-            }
-        }
-        CacheContext.set(getToken() + "task",list, 60*24*365);
+        taskMapper.updateById(task);
         return AjaxResult.success("更新成功");
     }
 
@@ -101,17 +72,11 @@ public class SyTaskServiceImpl extends MyCommonService implements SyTaskService 
      * 任务完成
      */
     @Override
-    public AjaxResult<?> complete(String taskId){
-        List<SyTask> list = getTaskList();
-        if (list == null){
-            return AjaxResult.failure("系统错误!");
-        }
-        for (int i = 0;i < list.size(); i++){
-            if (taskId.equals(list.get(i).getTaskId())){
-                list.get(i).setTaskSts(YesOrNoStatusEnum.YES);
-            }
-        }
-        CacheContext.set(getToken() + "task",list, 60*24*365);
+    public AjaxResult<?> complete(Integer taskId){
+        SyTask update = new SyTask();
+        update.setTaskId(taskId);
+        update.setTaskSts(YesOrNoStatusEnum.YES);
+        taskMapper.updateById(update);
         return AjaxResult.success("任务完成");
     }
 
@@ -119,21 +84,15 @@ public class SyTaskServiceImpl extends MyCommonService implements SyTaskService 
      * 任务转移
      */
     @Override
-    public AjaxResult<?> transfer(String taskId) {
-        List<SyTask> list = getTaskList();
-        if (list == null){
-            return AjaxResult.failure("系统错误!");
+    public AjaxResult<?> transfer(Integer taskId) {
+
+        SyTask syTask = taskMapper.selectById(taskId);
+        if (syTask.getTaskType() == TaskTypeEnum.TODAY){
+            syTask.setTaskType(TaskTypeEnum.TOTAL);
+        }else{
+            syTask.setTaskType(TaskTypeEnum.TODAY);
         }
-        for (int i = 0;i < list.size(); i++){
-            if (taskId.equals(list.get(i).getTaskId())){
-                if (list.get(i).getTaskType() == TaskTypeEnum.TODAY){
-                    list.get(i).setTaskType(TaskTypeEnum.TOTAL);
-                }else{
-                    list.get(i).setTaskType(TaskTypeEnum.TODAY);
-                }
-            }
-        }
-        CacheContext.set(getToken() + "task",list, 60*24*365);
+        taskMapper.updateById(syTask);
         return AjaxResult.success("操作完成");
     }
 
@@ -142,30 +101,13 @@ public class SyTaskServiceImpl extends MyCommonService implements SyTaskService 
      */
     @Override
     public AjaxResult<?> taskSort(List<SyTask> syTasks) {
-
-        TaskTypeEnum type = syTasks.get(0).getTaskType();
-        List<SyTask> otherList = new ArrayList<>();
-        List<SyTask> allList = getTaskList();
-        for (SyTask task : allList){
-            if (task.getTaskType() != type){
-                otherList.add(task);
-            }
+        SyTask update = new SyTask();
+        int i = 1;
+        for (SyTask item : syTasks){
+            update.setTaskId(item.getTaskId());
+            update.setTaskSort(i++);
+            taskMapper.updateById(update);
         }
-        syTasks.addAll(otherList);
-        CacheContext.set(getToken() + "task",syTasks, 60*24*365);
         return AjaxResult.success("操作完成");
-    }
-
-
-    /**
-     * 获取当前用户的任务数据列表
-     */
-    private List<SyTask> getTaskList(){
-        String key = getToken() + "task";
-        List<SyTask> list =  (List<SyTask>)CacheContext.get(key);
-        if (list == null || list.size() <= 0) {
-            return null;
-        }
-        return  list;
     }
 }

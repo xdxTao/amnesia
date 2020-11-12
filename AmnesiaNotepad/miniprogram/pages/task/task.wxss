@@ -9,7 +9,23 @@
     line-height: 100rpx;
     font-weight: 800;
 }
-
+.imagebarfor{
+    /* border: 1px red solid; */
+    z-index: 99999;
+    width: 99%;
+    height: 99%;
+    position: absolute;
+    text-align: center;
+    /* background-color:rgba(0,0,0,0.1) */
+}
+.imagebarfor image {
+    /* size:20; */
+    width: 100rpx;
+    height: 100rpx;
+    margin-top: 55%;
+    padding: 20rpx;
+    border-radius: 1px;
+}
 /* 没有数据时候的样式 */
 .empty {
     color: grey;
@@ -36,10 +52,11 @@
 .content {
     /* border: 1px red solid; */
     padding-left: 30rpx;
+    margin-top: 20rpx;
 }
 
 .box {
-    margin-top: 2%;
+    /* margin-top: 2%; */
     width: 96%;
     float: left;
     /* border: 1px red solid; */
@@ -47,6 +64,7 @@
 
 .left {
     float: left;
+    /* border: 1px green solid; */
 }
 
 .operator {
@@ -68,20 +86,23 @@
     width: 40rpx;
     padding-left: 20rpx;
     height: 40rpx;
+    margin-top: 8rpx;
+    /* border: 1px blue solid; */
+
 }
 
 /* 切换到任务总览 */
 .right {
-    width: 50%;
-    float: right;
-    /* border: 1px blue solid; */
-    height: 100%;
-}
-
-.right image {
     width: 33rpx;
     padding-left: 20rpx;
     height: 33rpx;
+}
+
+.right image {
+    width: 35rpx;
+    padding-left: 20rpx;
+    height: 35rpx;
+    margin-top: 8rpx; 
 }
 
 .movable-area {
@@ -97,6 +118,9 @@
     box-shadow: #D9D9D9 0px 0px 20px;
     width: 100%;
 }
+.list{
+    /* border: 1px blue solid; */
+}
 
 /* 添加按钮 */
 .addButton image {
@@ -111,10 +135,12 @@
 .addWindow {
     background-color: #f8f8f8;
     position: fixed;
-    height: 470px;
+    /* height: 420px; */
+    height: (750/2)rpx;
     width: 100%;
     bottom: -475px;
     padding-top: 10rpx;
+      /* border: 1px blue solid; */
 }
 
 .taskInput {
@@ -192,4 +218,5 @@
     margin-top: 10rpx;
     display: flex;
     justify-content: center;
+    padding-bottom: 20rpx;
 }

@@ -43,34 +43,15 @@ public class SyUserServiceImpl  extends MyCommonService
             user = new SyUser();
             user.setWxOpenId(openId)
                     .setUserStatus(YesOrNoStatusEnum.YES)
-                    .setIsAuthorize(YesOrNoStatusEnum.NO);
+                    .setIsAuthorize(YesOrNoStatusEnum.NO)
+                    .setHelpRead(0);
             syUserMapper.insert(user);
-            user = syUserMapper.selectOne(new SyUser().setWxOpenId(openId));
         }
         // 3、返回登录openId
-        return AjaxResult.success((Object)openId);
-    }
-
-    @Override
-    public AjaxResult<?> isAuthorize() {
-        String token = getToken();
-        SyUser user = syUserMapper.selectOne(new SyUser().setWxOpenId(token));
-        boolean result = false;
-        if (user.getIsAuthorize() == YesOrNoStatusEnum.YES){
-            result = true;
-        }
+        Map<String,Object> result = new HashMap<>();
+        result.put("openId",openId);
+        result.put("helpRead", user.getHelpRead());
         return AjaxResult.success(result);
-    }
-
-    @Override
-    public AjaxResult<?> authorize() {
-        String token = getToken();
-        SyUser user = syUserMapper.selectOne(new SyUser().setWxOpenId(token));
-        SyUser update = new SyUser();
-        update.setUserId(user.getUserId())
-                .setIsAuthorize(YesOrNoStatusEnum.YES);
-        syUserMapper.updateById(update);
-        return AjaxResult.success(true);
     }
 
     @Override
@@ -84,18 +65,10 @@ public class SyUserServiceImpl  extends MyCommonService
     }
 
     @Override
-    public AjaxResult<?> synAuthorize(Boolean authorize) {
-
-        String token = getToken();
-        SyUser user = syUserMapper.selectOne(new SyUser().setWxOpenId(token));
-        SyUser update = new SyUser().setUserId(user.getUserId());
-        if (authorize){
-            update.setIsAuthorize(YesOrNoStatusEnum.YES);
-        }else{
-            update.setIsAuthorize(YesOrNoStatusEnum.NO);
-        }
-        syUserMapper.updateById(update);
-        return AjaxResult.success();
+    public AjaxResult<?> completeHelpRead() {
+        SyUser curUser = getCurUser();
+        curUser.setHelpRead(1);
+        syUserMapper.updateById(curUser);
+        return null;
     }
-
 }

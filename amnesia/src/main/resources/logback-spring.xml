@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 级别从高到低 OFF 、 FATAL 、 ERROR 、 WARN 、 INFO 、 DEBUG 、 TRACE 、 ALL -->
+<!-- 日志输出规则 根据当前ROOT 级别，日志输出时，级别高于root默认的级别时 会输出 -->
+<!-- 以下 每个配置的 filter 是过滤掉输出文件里面，会出现高级别文件，依然出现低级别的日志信息，通过filter 过滤只记录本级别的日志 -->
+<!-- scan 当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。 -->
+<!-- scanPeriod 设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。 -->
+<!-- debug 当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
+<configuration debug="false" scan="false" scanPeriod="30 minutes">
+
+	<!-- 引入配置文件 <property resource="application.properties" /> <property resource="application-${spring.profiles.active:-prod}.properties" 
+		/> -->
+	<springProperty name="app.name" source="app.name"
+		defaultValue="amnesia" />
+	<!-- 日志记录级别 -->
+	<springProperty name="logback_level" source="logback.level.log"
+		defaultValue="DEBUG" />
+	<!-- SQL日志级别,只有DEBUG级别才打印sql -->
+	<springProperty name="logback_level_sql" source="logback.level.sql"
+		defaultValue="WARN" />
+	<!-- 是否输出日志到文件 -->
+	<springProperty name="logback_rolling" source="logback.rolling"
+		defaultValue="true" />
+	<!-- 设置日志输出目录 -->
+	<springProperty name="logback_rolling_path" source="logback.rolling.path"
+		defaultValue="logs" />
+	<!-- 日志文件最大大小 -->
+	<springProperty name="logback_max_file_size" source="logback.max_file_size"
+		defaultValue="10MB" />
+	<!-- 格式化输出：%d：表示日期，%thread：表示线程名，%-5level：级别从左显示5个字符宽度， %logger：日志输出者的名字(通常是所在类的全名)，%L：输出代码中的行号，%msg：日志消息，%n：换行符 -->
+	<property name="logback_pattern"
+		value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger %L  -| %msg%n" />
+
+	<if condition='p("logback_rolling").equals("true")'>
+		<then>
+			<!-- 滚动记录文件 -->
+			<appender name="FILE"
+				class="ch.qos.logback.core.rolling.RollingFileAppender">
+				<file>${logback_rolling_path}/${app.name}.log</file>
+				<!-- rollingPolicy：当发生滚动时，决定RollingFileAppender的行为，涉及文件移动和重命名 -->
+				<!-- TimeBasedRollingPolicy：最常用的滚动策略，它根据时间来制定滚动策略 -->
+				<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+					<!-- 活动文件的名字会根据fileNamePattern的值，每隔一段时间改变一次 -->
+					<fileNamePattern>${logback_rolling_path}/${app.name}.%d{yyyy-MM-dd}.%i.log
+					</fileNamePattern>
+					<!-- 日志文件的保存期限为30天 -->
+					<maxHistory>30</maxHistory>
+					<timeBasedFileNamingAndTriggeringPolicy
+						class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+						<!-- maxFileSize:这是活动文件的大小，默认值是10MB -->
+						<maxFileSize>${logback_max_file_size}</maxFileSize>
+					</timeBasedFileNamingAndTriggeringPolicy>
+				</rollingPolicy>
+				<encoder>
+					<pattern>${logback_pattern}</pattern>
+					<charset>UTF-8</charset>
+				</encoder>
+			</appender>
+
+			<root>
+				<appender-ref ref="FILE" />
+			</root>
+		</then>
+	</if>
+
+	<!-- 将日志打印到控制台 -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${logback_pattern}</pattern>
+		</encoder>
+	</appender>
+
+	<root level="${logback_level}">
+		<appender-ref ref="CONSOLE" />
+	</root>
+	<logger
+		name="org.springframework.context.annotation.ConfigurationClassPostProcessor"
+		level="ERROR" />
+	<logger name="com.xdx.mapper" level="${logback_level_sql}" additivity="false">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	<contextName>${app.name}</contextName>
+
+</configuration>

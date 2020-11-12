@@ -127,33 +127,7 @@ Page({
 	 * 页面每次进入加载
 	 */
 	onShow: function () {
-		const thus = this
-		// 判断用户是否已经注册
-		wx.login({
-			success(res) {
-				if (res.code) {
-					api.login({
-						code: res.code
-					}).then(res => {
-						store.token = res.data
-						// 判断用户是否授权
-						wx.getSetting({
-							success(res) {
-								// 同步授权
-								api.synAuthorize({
-									authorize: res.authSetting["scope.userInfo"]
-								}).then(res => {
-									thus.getDefaultLabel();
-								})
-							}
-						})
-
-					})
-				} else {
-					console.log('登录失败！' + res.errMsg)
-				}
-			}
-		})
+		this.getDefaultLabel();
 	},
 	/**
 	 * 生命周期函数--监听页面加载
@@ -164,7 +138,6 @@ Page({
 		this.storeBindings = createStoreBindings(this, {
 			store,
 			fields: [
-				'isAuthorize',
 				'token'
 			],
 			actions: ['update'], // 同上，这里是方法名字

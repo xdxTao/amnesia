@@ -1,7 +1,6 @@
 package com.xdx.common.common;
 
 import com.github.pagehelper.PageHelper;
-import com.xdx.common.utils.redis.CacheContext;
 import com.xdx.entitys.pojo.SyUser;
 import com.xdx.mapper.user.SyUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 这里面封装一些Service公用的方法
@@ -19,6 +20,8 @@ public class MyCommonService {
 
     @Autowired
     private SyUserMapper userMapper;
+
+    private static Map<String,SyUser> userMap = new HashMap<>(1000);
 
     /**
      * 使用pageHelper 默认当前页 10
@@ -35,9 +38,10 @@ public class MyCommonService {
      * 获取当前用户
      */
     public SyUser getCurUser(){
-        SyUser user = (SyUser)CacheContext.get(getToken());
+        SyUser user = userMap.get(getToken());
         if (user == null){
             user = userMapper.selectOne(new SyUser().setWxOpenId(getToken()));
+            userMap.put(user.getWxOpenId(), user);
         }
         return user;
     }
@@ -49,7 +53,6 @@ public class MyCommonService {
      * @author 小道仙
      * @date 2020年5月5日
      */
-
     public String getToken(){
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = servletRequestAttributes.getRequest();

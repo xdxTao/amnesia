@@ -1,9 +1,14 @@
-package com.xdx.entitys.dto;
+package com.xdx.entitys.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.xdx.common.enums.TaskTypeEnum;
 import com.xdx.common.enums.YesOrNoStatusEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.util.Date;
+
+import static com.baomidou.mybatisplus.annotation.IdType.AUTO;
 
 /**
  * 任务实体
@@ -15,7 +20,13 @@ public class SyTask {
     /**
      * 任务id
      */
-    private String taskId;
+    @TableId(type = AUTO)
+    private Integer taskId;
+
+    /**
+     * 用户id
+     */
+    private Integer userId;
 
     /**
      * 任务类型
@@ -33,6 +44,11 @@ public class SyTask {
     private String taskDesc;
 
     /**
+     * 任务排序
+     */
+    private Integer taskSort;
+
+    /**
      * 任务状态
      */
     private YesOrNoStatusEnum taskSts;
@@ -41,4 +57,14 @@ public class SyTask {
      * 任务类型
      */
     private TaskTypeEnum taskType;
+
+    /**
+     * 是否删除 0 没有删除，1 已经删除
+     */
+    private YesOrNoStatusEnum taskDel;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 }

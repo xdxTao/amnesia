@@ -17,6 +17,7 @@
     justify-content: space-between;
     margin-bottom: 15rpx;
     width: 100%;
+    align-items: center;
 }
 
 .movable-area {
@@ -41,6 +42,9 @@
 switch {
     /* zoom:0.6 */
     transform: scale(0.6);
+}
+.content_name{
+    margin-top: 15rpx;
 }
 
 .content_sort {

@@ -3,8 +3,8 @@ package com.xdx.controller.task;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.xdx.common.common.AjaxResult;
 import com.xdx.common.utils.JsonUtils;
-import com.xdx.entitys.dto.SyTask;
-import com.xdx.entitys.pojo.SyLabel;
+import com.xdx.common.utils.Tools;
+import com.xdx.entitys.pojo.SyTask;
 import com.xdx.service.task.SyTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +25,9 @@ public class SyTaskController {
      */
     @PostMapping("/task/add")
     public AjaxResult<?> add(@RequestBody SyTask task){
+        if(!Tools.safeCheck(task.getTaskTitle()) || !Tools.safeCheck(task.getTaskDesc())){
+            return AjaxResult.failure("存在非法字符，请重新输入");
+        }
         if (task == null || task.getTaskTitle() == null){
             return AjaxResult.failure("参数不全");
         }
@@ -45,6 +48,9 @@ public class SyTaskController {
      */
     @PostMapping("/task/update")
     public AjaxResult<?> update(@RequestBody SyTask task){
+        if(!Tools.safeCheck(task.getTaskTitle()) || !Tools.safeCheck(task.getTaskDesc())){
+            return AjaxResult.failure("存在非法字符，请重新输入");
+        }
         if (task == null || "".equals(task.getTaskId())){
             return AjaxResult.failure("确少参数:taskId");
         }
@@ -55,7 +61,7 @@ public class SyTaskController {
      * 任务完成
      */
     @GetMapping("/task/complete")
-    public AjaxResult<?> complete(@RequestParam String taskId){
+    public AjaxResult<?> complete(@RequestParam Integer taskId){
         if (taskId == null || "".equals(taskId)){
             return AjaxResult.failure("确少参数:taskId");
         }
@@ -66,7 +72,7 @@ public class SyTaskController {
      * 任务转移
      */
     @GetMapping("/task/transfer")
-    public AjaxResult<?> transfer(@RequestParam String taskId){
+    public AjaxResult<?> transfer(@RequestParam Integer taskId){
         if (taskId == null || "".equals(taskId)){
             return AjaxResult.failure("确少参数:taskId");
         }

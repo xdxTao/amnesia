@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.xdx.common.common.AjaxResult;
 import com.xdx.common.utils.CheckParams;
 import com.xdx.common.utils.JsonUtils;
+import com.xdx.common.utils.Tools;
 import com.xdx.entitys.pojo.SyLabel;
 import com.xdx.service.label.SyLabelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,13 @@ public class SyLabelController {
      */
     @PostMapping("/label/add")
     public AjaxResult<?> add(@RequestBody Map<String,Object> params){
+
         AjaxResult check = CheckParams.check(params,  "labelName");
         if (!check.getSuccess()){
             return check;
+        }
+        if(!Tools.safeCheck(params.get("labelName").toString())){
+            return AjaxResult.failure("存在非法字符，请重新输入");
         }
         return syLabelService.add(params);
     }
@@ -46,6 +51,9 @@ public class SyLabelController {
     public AjaxResult<?> update(@RequestBody SyLabel syLabel){
         if (syLabel == null || syLabel.getLabelId() == null || syLabel.getLabelId().equals("")){
             return AjaxResult.failure("缺少必要参数：labelId");
+        }
+        if(!Tools.safeCheck(syLabel.getLabelName())){
+            return AjaxResult.failure("存在非法字符，请重新输入");
         }
         return syLabelService.update(syLabel);
     }

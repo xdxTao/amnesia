@@ -28,14 +28,13 @@ public class LoginInterceptor implements HandlerInterceptor {
         String token = request.getHeader("token");
         if (token != null){
             SyUser user = userMapper.selectOne(new SyUser().setWxOpenId(token)
-                    .setUserStatus(YesOrNoStatusEnum.YES)
-                    .setIsAuthorize(YesOrNoStatusEnum.YES));
+                    .setUserStatus(YesOrNoStatusEnum.YES));
             if (user != null){
                 return true;
             }
         }
         response.setContentType("text/html;charset=utf-8");
-        response.getWriter().write(JSON.toJSONString(AjaxResult.failure("未授权!")));
+        response.getWriter().write(JSON.toJSONString(AjaxResult.failure("系统异常!")));
 //        response.getWriter().write(JSON.toJSONString(AjaxResult.failure("未授权/用户被禁用!")));
         return false;
     }

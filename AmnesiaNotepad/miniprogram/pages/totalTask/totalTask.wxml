@@ -6,8 +6,8 @@
     </view>
 </view>
 
-<!-- 空任务 -->
-<view class="empty" wx:if="{{isempty}}">
+<!-- 空任务 --> 
+<view class="empty" wx:if="{{labelBox}}">
     <image src="/images/empty.png" />
     生活不简单，尽量简单过。简单生活、慢生活、轻生活，均是一种生活态度，内心富有充盈，生活方能简单从容。
 </view>

@@ -1,15 +1,54 @@
 <view class="box">
-    一、进入个人中心，点击登录。
-</view>
-<view class="box">
-    二、在任务管理界面，点击右下角的 + 添加任务。任务分为标题，和描述。（只能添加当天的任务）
-</view>
-<view class="box">
-    三、对于已添加的任务，点击前面的框框，就表示完成了（不可逆），点击后面的任务标题，就会弹出任务描述，描述不可修改。
-</view>
-<view class="box">
-    四、每天凌晨会清楚上一天的任务数据。
-</view>
-<view class="box">
-    五、为了方便你的使用，你可以把它添加到浮窗，或添加到桌面
+    <view class="content">
+        <view class="title1">
+            1、在今日任务页面的右下角有一个加号按钮，点击就可以添加任务。
+        </view>
+        <image class="image" src="https://tx.amnesia.xdx97.com:8082/api/download?fileName=2020/11/12/b05a785b-e739-44de-9898-8f88339ec6fd.gif"></image>
+    </view>
+    <view class="content">
+        <view class="title">
+            2、在个人配置里面可以配置任务标签，每个用户最多可以配置4个标签。
+        </view>
+        <image class="image" src="https://tx.amnesia.xdx97.com:8082/api/download?fileName=2020/11/12/698d8613-d5d9-4d3d-a6e8-4cc09595c3ef.gif"></image>
+    </view>
+    <view class="content">
+        <view class="title">
+            3、对于已经完成的任务，我们只需要点击前面的单选框即可完成。
+        </view>
+        <image class="image" src="https://tx.amnesia.xdx97.com:8082/api/download?fileName=2020/11/12/54a1688e-d66b-42bd-bd05-9f99b0b3e848.gif"></image>
+    </view>
+    <view class="content">
+        <view class="title">
+            4、点击每个任务的标题，即可对任务进行修改。
+        </view>
+        <image class="image" src="https://tx.amnesia.xdx97.com:8082/api/download?fileName=2020/11/12/9a804757-56c1-4387-ad73-6031e431eaf1.gif"></image>
+    </view>
+    <view class="content">
+        <view class="title">
+            5、点击右边的箭头可以在今日任务和任务总览里面来回切换。
+        </view>
+        <image class="image" src="https://tx.amnesia.xdx97.com:8082/api/download?fileName=2020/11/12/d8799eca-0216-4ace-acb4-bf0db88fe4fc.gif"></image>
+    </view>
+    <view class="content">
+        <view class="title">
+            6、拖动右边的排序按钮可以进行上下拖动排序。
+        </view>
+        <image class="image" src="https://tx.amnesia.xdx97.com:8082/api/download?fileName=2020/11/12/d9385992-4ca2-4b52-b436-63e460b64d35.gif"></image>
+    </view>
+    <view class="content">
+        <view class="title">
+            7、每天未完成的今日任务会自动移动到总任务。
+        </view>
+    </view>
+    <view class="content">
+        <view class="title">
+            8、已完成的任务数据，第二天凌晨会自从删除。
+        </view>
+    </view>
+    <view class="content">
+        <view class="title">
+            9、标签可以选择是否显示，也可以拖动排序（添加的时候和任务总览的时候的排序与列表一致）。
+        </view>
+    </view>
+    
 </view>

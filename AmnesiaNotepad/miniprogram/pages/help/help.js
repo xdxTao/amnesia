@@ -5,14 +5,17 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        mapUrl: "",
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.setData({
+            // mapUrl: "http://player.bilibili.com/player.html?aid=970135845&bvid=BV1Sp4y1k7Rn&cid=251608984&page=1"
+          })
+        
     },
 
     /**

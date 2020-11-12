@@ -1,5 +1,5 @@
 <view class="main">
-	<block wx:if="{{isAuthorize}}">
+	<block >
 		<view class="head">
 			<view class="head_left">
 				<open-data type="userAvatarUrl"></open-data>
@@ -9,7 +9,7 @@
 				<view class="head_right_2">第 {{userSort}} 号用户</view>
 			</view>
 		</view>
-		<navigator url="/pages/about/about">
+		<!-- <navigator url="/pages/about/about">
 			<view class="box" style="background-color: {{bgColor[0]}}" bindtap="inBox" data-index="0" >
 				<view class="box_left">
 					<view> 
@@ -23,7 +23,7 @@
 					<image src="/images/large.png" />
 				</view>
 			</view>
-		</navigator>
+		</navigator> -->
 		<view class="box box_2" style="background-color: {{bgColor[1]}}" bindtap="inBox" data-index="1">
 			<button plain="true" style="width:100vw; border: 1px white solid; font-size: 14px; padding: 0; font-weight: 410; " class="contactButton" open-type="contact" bindcontact="handleContact">
 			<view class="box_left">
@@ -89,12 +89,12 @@
 		</navigator>
 	</block>
 	
-	<view wx:else class="loginMain">
+	<!-- <view wx:else class="loginMain">
 		<view  class="login">
 			 <button type="primary" class="loginButton"   bindgetuserinfo="authorize" open-type="getUserInfo">登录/授权</button>
 		</view>
 		<view class="loginDesc">
 			登录体验小程序 
 		</view>
-	</view>
+	</view> -->
 </view>

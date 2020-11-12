@@ -1,7 +1,7 @@
 package com.xdx.service.task;
 
 import com.xdx.common.common.AjaxResult;
-import com.xdx.entitys.dto.SyTask;
+import com.xdx.entitys.pojo.SyTask;
 
 import java.util.List;
 
@@ -25,12 +25,12 @@ public interface SyTaskService {
     /**
      * 更新完成
      */
-    AjaxResult<?> complete(String taskId);
+    AjaxResult<?> complete(Integer taskId);
 
     /**
      * 任务转移
      */
-    AjaxResult<?> transfer(String taskId);
+    AjaxResult<?> transfer(Integer taskId);
 
     /**
      * 任务排序

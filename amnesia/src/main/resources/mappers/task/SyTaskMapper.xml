@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdx.mapper.task.SyTaskMapper">
+
+    <resultMap id="BaseResultMap" type="com.xdx.entitys.pojo.SyTask">
+        <id column="task_id" jdbcType="INTEGER" property="taskId" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="label_id" jdbcType="INTEGER" property="labelId" />
+        <result column="task_title" jdbcType="VARCHAR" property="taskTitle" />
+        <result column="task_desc" jdbcType="VARCHAR" property="taskDesc" />
+        <result column="task_sts" jdbcType="TINYINT" property="taskSts" />
+        <result column="task_sort" jdbcType="INTEGER" property="taskSort" />
+        <result column="task_type" jdbcType="TINYINT" property="taskType" />
+        <result column="task_del" jdbcType="TINYINT" property="taskDel" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        task_id,
+        user_id,
+        label_id,
+        task_title,
+        task_desc,
+        task_sort,
+        task_sts,
+        task_type,
+        task_del,
+        create_time
+    </sql>
+
+    <update id="updateByKey">
+        UPDATE sy_task SET
+        <if test="userId != null">
+            user_id = #{userId},
+        </if>
+        <if test="labelId != null">
+            label_id = #{labelId},
+        </if>
+        <if test="taskTitle != null">
+            task_title = #{taskTitle},
+        </if>
+        <if test="taskSort != null">
+            task_sort = #{taskSort},
+        </if>
+        <if test="taskDesc != null">
+            task_desc = #{taskDesc},
+        </if>
+        <if test="taskSts != null">
+            task_sts = #{taskSts},
+        </if>
+        <if test="taskType != null">
+            task_type = #{taskType},
+        </if>
+        <if test="taskDel != null">
+            task_del = #{taskDel},
+        </if>
+        <if test="createTime != null">
+            create_time = #{createTime},
+        </if>
+        task_id = #{taskId}
+        WHERE
+        task_id = #{taskId}
+    </update>
+
+    <select id="selectMaxSort" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        SELECT max(task_sort) FROM sy_task WHERE user_id = #{userId} AND task_sts = 0 AND task_del = 0
+    </select>
+
+    <update id="updateCompleted">
+        UPDATE sy_task SET task_del = 1 WHERE task_sts = 1
+    </update>
+
+    <update id="changeTask">
+        UPDATE sy_task SET task_type = 1 WHERE task_type = 0 AND task_sts = 0
+    </update>
+</mapper>

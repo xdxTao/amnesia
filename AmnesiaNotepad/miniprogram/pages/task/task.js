@@ -8,6 +8,7 @@ import {
 import api from '../../utils/api.js'
 Page({
 	data: {
+		isload:true,
 		isempty: true,
 		list: [],
 		labelList: [],
@@ -130,46 +131,55 @@ Page({
 	 */
 	onShow: function () {
 		const thus = this
-		// 判断用户是否已经注册
-		wx.login({
-			success(res) {
-				if (res.code) {
-					api.login({
-						code: res.code
-					}).then(res => {
-						store.token = res.data
-						// 判断用户是否授权
-						wx.getSetting({
-							success(res) {
-								let auto = res.authSetting["scope.userInfo"] == undefined ? false : true
-								console.log(auto);
-								// 同步授权
-								api.synAuthorize({
-									authorize: auto
-								}).then(res => {
-									// 获取列表数据
-									thus.getTaskList()
+		if(store.token == null || store.token == ''){
+			wx.login({
+				success(res) {
+					if (res.code) {
+						api.login({
+							code: res.code
+						}).then(res => {
+							store.token = res.data.openId
+							thus.setData({
+								isload: false,
+							})
+							if(res.data.helpRead == null || res.data.helpRead != 1){
+								wx.showModal({
+									title: '提示',
+									content: '点击确定查看入门帮助!',
+									success: function (res) {
+										if (res.confirm) {
+											api.completeHelpRead()
+											wx.navigateTo ({
+												url: '../help/help',
+											})
+										 }
+									}
 								})
 							}
+							// 获取列表数据
+							thus.getTaskList()
+							// 获取标签数据 
+							thus.getListLabel()
 						})
-
-					})
-				} else {
-					console.log('登录失败！' + res.errMsg)
+					} else {
+						console.log('登录失败！' + res.errMsg)
+					}
 				}
-			}
-		})
+			})
+		}else{
+			thus.getTaskList()
+			// 获取标签数据
+			thus.getListLabel()
+		}
 	},
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		const thus = this
 		// 做绑定操作
 		this.storeBindings = createStoreBindings(this, {
 			store,
 			fields: [
-				'isAuthorize',
 				'token'
 			],
 			actions: ['update'], // 同上，这里是方法名字
@@ -189,13 +199,12 @@ Page({
 	 * 打开任务添加窗口
 	 */
 	openTask: function () {
-		this.getListLabel()
 		var animation = wx.createAnimation({
 			duration: 1000,
 			timingFunction: 'ease',
 			delay: 100
 		});
-		animation.opacity(1).translateY(-470).step()
+		animation.opacity(1).translateY(-475).step()
 		this.setData({
 			ani: animation.export()
 		})
@@ -359,6 +368,11 @@ Page({
 				if (res.data.length > 0) {
 					this.setData({
 						isempty: false,
+					})
+				}
+				else{
+					this.setData({
+						isempty: true,
 					})
 				}
 				this.setData({

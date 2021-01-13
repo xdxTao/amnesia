@@ -52,7 +52,7 @@
                             data-labelId="{{item.labelId}}" data-title="{{item.taskTitle}}"
                             data-type="{{item.taskSts}}"> {{item.taskTitle}} </text>
                     </view>
-                    <view class=".operator">
+                    <view class="operator">
                         <!-- 拖动按钮 -->
                         <view class="sort">
                             <image  color='Gray' 

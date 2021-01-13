@@ -131,7 +131,7 @@ Page({
 	 */
 	onShow: function () {
 		const thus = this
-		if(store.token == null || store.token == ''){
+		if(store.token == null || store.token == ''){			
 			wx.login({
 				success(res) {
 					if (res.code) {
@@ -170,6 +170,9 @@ Page({
 			thus.getTaskList()
 			// 获取标签数据
 			thus.getListLabel()
+			thus.setData({
+				isload: false,
+			})
 		}
 	},
 	/**

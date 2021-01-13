@@ -15,6 +15,7 @@ public interface MyBaseMapper<T> extends com.baomidou.mybatisplus.core.mapper.Ba
 
     /**
      * 查询列表
+     * @param t
      */
     default List<T> selectList(T t) {
         QueryWrapper<T> qw = new QueryWrapper<>();

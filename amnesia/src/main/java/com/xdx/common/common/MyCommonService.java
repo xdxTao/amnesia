@@ -11,6 +11,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 这里面封装一些Service公用的方法
@@ -21,7 +22,7 @@ public class MyCommonService {
     @Autowired
     private SyUserMapper userMapper;
 
-    private static Map<String,SyUser> userMap = new HashMap<>(1000);
+    private static Map<String,SyUser> userMap = new ConcurrentHashMap<>(1000);
 
     /**
      * 使用pageHelper 默认当前页 10
@@ -42,6 +43,9 @@ public class MyCommonService {
         if (user == null){
             user = userMapper.selectOne(new SyUser().setWxOpenId(getToken()));
             userMap.put(user.getWxOpenId(), user);
+        }
+        if (userMap.size() > 1000){
+            userMap.clear();
         }
         return user;
     }

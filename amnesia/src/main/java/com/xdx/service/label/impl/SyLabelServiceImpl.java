@@ -27,10 +27,10 @@ public class SyLabelServiceImpl extends MyCommonService implements SyLabelServic
             return AjaxResult.failure("标签必须为2个字符");
         }
         Integer userId = getCurUser().getUserId();
-        // 查看该用户的标签个数，不能超过4个
+        // 查看该用户的标签个数，不能超过5个
         Integer count = labelMapper.selectCount(new SyLabel().setUserId(userId));
-        if (count >= 4){
-            return AjaxResult.failure("最多只能创建4个标签");
+        if (count >= 5){
+            return AjaxResult.failure("最多只能创建5个标签");
         }
         params.put("userId", userId);
         labelMapper.addLabel(params);

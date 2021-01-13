@@ -1,11 +1,13 @@
 <view class="main">
-	<block >
+	<block>
 		<view class="head">
 			<view class="head_left">
 				<open-data type="userAvatarUrl"></open-data>
 			</view>
 			<view class="head_right">
-				<view class="head_right_1"><open-data type="userNickName"></open-data></view>
+				<view class="head_right_1">
+					<open-data type="userNickName"></open-data>
+				</view>
 				<view class="head_right_2">第 {{userSort}} 号用户</view>
 			</view>
 		</view>
@@ -24,29 +26,31 @@
 				</view>
 			</view>
 		</navigator> -->
-		<view class="box box_2" style="background-color: {{bgColor[1]}}" bindtap="inBox" data-index="1">
-			<button plain="true" style="width:100vw; border: 1px white solid; font-size: 14px; padding: 0; font-weight: 410; " class="contactButton" open-type="contact" bindcontact="handleContact">
-			<view class="box_left">
-				<view> 
-					<image src="/images/commont.png"/>
+		<view class="box_2" style="background-color: {{bgColor[1]}}" bindtap="inBox" data-index="1">
+			<button plain="true"
+				style="width:100vw; border: 1px white solid;font-size: 14px; padding: 0; font-weight: 410; "
+				class="contactButton" open-type="contact" bindcontact="handleContact">
+				<view class="box_left">
+					<view>
+						<image src="/images/commont.png" />
+					</view>
+					<view class="text">
+						<text>意见反馈</text>
+					</view>
 				</view>
-				<view class="text">
-					<text>意见反馈</text>
-				</view>
-			</view>
 			</button>
 			<view class="box_icon">
 				<image src="/images/large.png" />
 			</view>
 		</view>
 		<view class="contactButton">
-		
+
 		</view>
 		<navigator url="/pages/author/author">
 			<view class="box" style="background-color: {{bgColor[2]}}" bindtap="inBox" data-index="2">
 				<view class="box_left">
-					<view> 
-						<image src="/images/author.png"/>
+					<view>
+						<image src="/images/author.png" />
 					</view>
 					<view class="text">
 						<text>关于作者</text>
@@ -58,10 +62,10 @@
 			</view>
 		</navigator>
 		<navigator url="/pages/help/help">
-			<view class="box" style="background-color: {{bgColor[3]}}" bindtap="inBox" data-index="3" >
+			<view class="box" style="background-color: {{bgColor[3]}}" bindtap="inBox" data-index="3">
 				<view class="box_left">
-					<view> 
-						<image src="/images/help.png"/>
+					<view>
+						<image src="/images/help.png" />
 					</view>
 					<view class="text">
 						<text>使用帮助</text>
@@ -73,10 +77,10 @@
 			</view>
 		</navigator>
 		<navigator url="/pages/label/label">
-			<view class="box" style="background-color: {{bgColor[4]}}" bindtap="inBox" data-index="4" >
+			<view class="box" style="background-color: {{bgColor[4]}}" bindtap="inBox" data-index="4">
 				<view class="box_left">
-					<view> 
-						<image src="/images/label.png"/>
+					<view>
+						<image src="/images/label.png" />
 					</view>
 					<view class="text">
 						<text>标签管理</text>
@@ -87,8 +91,42 @@
 				</view>
 			</view>
 		</navigator>
+		<navigator url="/pages/daily/daily">
+			<view class="box" style="background-color: {{bgColor[4]}}" bindtap="inBox" data-index="4">
+				<view class="box_left">
+					<view>
+						<image src="/images/daily.png" />
+					</view>
+					<view class="text">
+						<text>任务模板</text>
+					</view>
+				</view>
+				<view class="box_icon">
+					<image src="/images/large.png" />
+				</view>
+			</view>
+		</navigator>
+		<navigator url="/pages/edition/edition">
+			<view class="box" style="background-color: {{bgColor[4]}}" bindtap="inBox" data-index="4">
+				<view class="box_left">
+					<view>
+						<image src="/images/edition.png" />
+					</view>
+					<view class="text">
+						<text>版本更新</text>
+					</view>
+				</view>
+				<view class="box_icon">
+					<image src="/images/large.png" />
+				</view>
+			</view>
+		</navigator>
+		<view class="edition">
+			<text class="prefix">V</text>
+			<text class="suffix">1.2</text>
+		</view>
 	</block>
-	
+
 	<!-- <view wx:else class="loginMain">
 		<view  class="login">
 			 <button type="primary" class="loginButton"   bindgetuserinfo="authorize" open-type="getUserInfo">登录/授权</button>

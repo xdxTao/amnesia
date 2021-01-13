@@ -1,0 +1,19 @@
+.main{
+    width: 80%;
+    /* border: 1px red solid; */
+    margin-top: 20rpx;
+    margin-left: 10%;
+}
+.box{
+
+  padding-top: 30rpx;
+
+}
+.title{
+    font-weight: 550;
+    border-bottom: 1px gainsboro solid;
+    padding-bottom: 5rpx;
+}
+.detail{
+    padding-left: 30rpx;
+}

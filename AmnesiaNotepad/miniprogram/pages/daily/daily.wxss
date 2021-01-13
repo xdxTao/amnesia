@@ -1,26 +1,49 @@
 @import '../../assets/iconfont.wxss';
 @import '../../assets/weiui.wxss';
 
+
+.head {
+    height: 100rpx;
+    width: 100%;
+    border-bottom: 1rpx solid gainsboro;
+    text-align: center;
+    /* padding-left: 30rpx; */
+    line-height: 100rpx;
+    display: flex;
+    /* justify-content: space-around; */
+    flex-direction: row;
+}
+
+.checkbox {
+    /* border: solid 1px red; */
+    width: 14%;
+    height: 100rpx;
+
+    font-size: 10px;
+}
+
 /** 标签部分 */
-.label {
+.labelTotal {
     height: 80rpx;
     /* border: 1px blue solid; */
-    width: 96%;
-    margin-left: 1%;
-    border-bottom: 1rpx #f8f8f8 solid;
+    width: 88%;
+    /* margin-left: 2%; */
+    /* border-bottom: 1rpx #f8f8f8 solid; */
     display: flex;
     /* margin-top: 2rpx; */
+    margin-top: 10rpx;
+
     justify-content: flex-start;
-    position: fixed;
+    /* position:fixed; */
     top: 0;
-    z-index: 99;
+    /* z-index: 99; */
     background-color: white;
 }
 
-.labelBox {
+.labelTotalBox {
     width: 16%;
     border: 1rpx gainsboro solid;
-    margin-left: 2%;
+    margin-left: 3%;
     margin-top: 10rpx;
     height: 60rpx;
     text-align: center;
@@ -29,11 +52,11 @@
     background-color: #f8f8f8;
 }
 
-.labelBox_select {
+.labelTotalBox_select {
     width: 16%;
     border: 1rpx #1296db solid;
     height: 60rpx;
-    margin-left: 2%;
+    margin-left: 3%;
     margin-top: 10rpx;
     text-align: center;
     border-radius: 100rpx;
@@ -41,115 +64,86 @@
     color: #1296db;
 }
 
-/* 没有数据时候的样式 */
-.empty {
-    color: grey;
-    padding-top: 100rpx;
-    padding-left: 50rpx;
-    padding-right: 50rpx;
-    font-family: '方正舒体';
-    font-size: large;
-    display: flex;
-}
-
-.empty image {
-    margin-left: 200rpx;
-    width: 200rpx;
-    height: 200rpx;
-    opacity: 0.2;
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+/* 复制添加按钮 */
+.copyButton image {
+    position: fixed;
+    /* bottom: 50px; */
+    right: 5px;
+    margin-top: 20rpx;
+    padding-right: 15rpx;
+    width: 50rpx;
+    height: 50rpx;
+    /* border: 1rpx #1296db solid; */
 }
 
 .content {
     /* border: 1px red solid; */
-    padding-left: 30rpx;
-    margin-top: 100rpx;
+    /* padding-left: 30rpx; */
+    margin-top: 20rpx;
+    
 }
 
 .box {
     /* margin-top: 2%; */
     width: 96%;
+    margin-left: 3%;
     float: left;
     /* border: 1px red solid; */
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+
 }
 
 .left {
     float: left;
-    width: 80%;
+    /* border: 1px green solid; */
+    width: 85%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-}
-
-.operator {
-    width: 16%;
-    float: right;
     display: flex;
-    justify-content: center;
-}
-
-/* 拖动排序 */
-.sort {
-    width: 50%;
-    height: 100%;
-}
-
-.sort image {
-    width: 40rpx;
-    padding-left: 20rpx;
-    height: 40rpx;
-    margin-top: 8rpx;
+    flex-direction: row;
 
 }
 
-/* 切换到任务总览 */
-.right {
-    width: 33rpx;
-    padding-left: 20rpx;
-    height: 33rpx;
-    margin-top: 8rpx;
+.del {
+    width: 11%;
+    /* padding-left: 3%; */
+    float: right;
+    /* border: 1px blue solid; */
+    /* height: 100%; */
 }
 
-.right image {
-    width: 35rpx;
-    padding-left: 20rpx;
-    height: 35rpx;
-}
+.del image {
+    width: 38rpx;
+    height: 38rpx;
+    padding-left: 5rpx;
+    margin-top: 10rpx;
+    /* border: 1px blue solid; */
 
-.movable-area {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    width: 100%;
-}
-
-.movable-row {
-    box-shadow: #D9D9D9 0px 0px 20px;
-    width: 100%;
 }
 
 /* 添加按钮 */
 .addButton image {
     position: fixed;
-    bottom: 50px;
+    bottom: 100px;
     right: 40px;
     width: 100rpx;
     height: 100rpx;
+    /* border: 1rpx #1296db solid; */
 }
 
 /* 添加窗口 */
 .addWindow {
     background-color: #f8f8f8;
     position: fixed;
-    height: 415px;
+    /* height: 420px; */
+    height: (750/2)rpx;
     width: 100%;
-    bottom: -420px;
+    bottom: -475px;
     padding-top: 10rpx;
+    /* border: 1px blue solid; */
 }
 
 .taskInput {
@@ -195,4 +189,5 @@
     margin-top: 10rpx;
     display: flex;
     justify-content: center;
+    padding-bottom: 20rpx;
 }

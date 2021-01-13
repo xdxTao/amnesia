@@ -1,54 +1,53 @@
 server:
-    port: 8082
-    servlet:
-        context-path: /api
+  port: 8082
+  servlet:
+    context-path: /api
 
-# https 配置  上线需要
-#  ssl:
-#      key-store: /xdx/amnesia/amnesia.pfx
-#      key-store-password: wqp355Bp
-#      key-store-type: PKCS12
+# https 配置
+#    ssl:
+#        key-store: /xdx/amnesia/amnesia.pfx
+#        key-store-password: wqp355Bp
+#        key-store-type: PKCS12
 
 
 mybatis:
-    type-aliases-package: com.xdx.entitys         # 所有Entity别名类所在包
+  type-aliases-package: com.xdx.entitys         # 所有Entity别名类所在包
 
 
 mybatis-plus:
-    type-handlers-package: com.xdx.common.handler           # 处理器配置
-    mapper-locations: classpath:mappers/**/*Mapper.xml      # mapper映射文件 - classpath:mybatis/mapper/**/*.xml
+  type-handlers-package: com.xdx.common.handler           # 处理器配置
+  mapper-locations: classpath:mappers/**/*Mapper.xml      # mapper映射文件 - classpath:mybatis/mapper/**/*.xml
 
 
 spring:
-    datasource:
-        type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://ip:prot/amnesia?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=UTC
-        username: root
-        password: root
-        dbcp2:
-            min-idle: 5                                 # 数据库连接池最小维持连接数
-            initial-size: 5                            # 初始连接数
-            max-total: 5                               # 最大连接数
-            max-wait-millis: 200                      # 等待链接获取的最大超时时间
-    main:
-        allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
-        
-# 日志打印
-logback:
-    level:
-        log: INFO
-        sql: INFO
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/amnesia?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+    dbcp2:
+      min-idle: 5                                 # 数据库连接池最小维持连接数
+      initial-size: 5                            # 初始连接数
+      max-total: 5                               # 最大连接数
+      max-wait-millis: 200                      # 等待链接获取的最大超时时间
+  main:
+    allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
+
+# 开启MyBatis打印日志
+logging:
+  level:
+    com.xdx.mapper: debug
 
 
 
 
 # 微信小程序数据
 wx:
-    appid:  
-    secret:  
-    grantType: authorization_code
-    loginUrl: https://api.weixin.qq.com/sns/jscode2session
-    # 文字校验
-    msgSecCheck: https://api.weixin.qq.com/wxa/msg_sec_check?access_token=
+  appid: 
+  secret: 
+  grantType: authorization_code
+  loginUrl: https://api.weixin.qq.com/sns/jscode2session
+  # 文字校验
+  msgSecCheck: https://api.weixin.qq.com/wxa/msg_sec_check?access_token=
 

@@ -1,0 +1,14 @@
+<view class="main">
+	<block wx:for='{{list}}'>
+		<view class="box">
+			<view class="title">{{item.editionInfo}} </view>
+			<view wx:if="item.lists">
+				<block wx:for='{{item.lists}}'>
+					<view class="detail">
+						    {{item.editionInfo}}
+					</view>
+				</block>
+			</view>
+		</view>
+	</block>
+</view>

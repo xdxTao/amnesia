@@ -1,0 +1,66 @@
+page {
+  height: 100%;
+  width: 100%;
+}
+
+.zhuti {
+  height: 100%;
+  width: 100%;
+
+  position: relative;
+}
+
+.row {
+  height: 47px;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.title-row {
+  border-bottom: 1px solid #888888;
+
+  color: #888888;
+}
+
+.list-row {
+  padding: 8px 0px;
+  border-bottom: 1px solid #D9D9D9;
+  background-color: white;
+}
+
+.movable-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+}
+
+.movable-row {
+  box-shadow: #D9D9D9 0px 0px 20px;
+}
+
+.col1 { 
+  width: 60%;
+}
+.col2 { 
+  width: 10%;
+}
+.col3 { 
+  width: 10%;
+}
+
+.ready-place {
+  background-color: #CCCCCC
+}
+
+.content {
+  font-size: 17px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

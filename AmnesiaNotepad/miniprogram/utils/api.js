@@ -1,90 +1,117 @@
 import apiRequest from './request.js';
-const HOST = 'http://127.0.0.1:8082/api/';
 // 真机测试需要用这个ip
-// const HOST = 'http://192.168.12.123:8082/api/'
-import { store } from '../store'
+// const HOST = 'http://127.0.0.1:8082/api/'
+// const HOST = 'http://192.168.137.143:8082/api/'
+
+import {
+    store
+} from '../store'
 const API_LIST = {
     // 登录
-    login:{
+    login: {
         method: 'GET',
         url: 'user/login'
     },
     // 获取用户编号
-    userNumber:{
+    userNumber: {
         method: 'GET',
         url: 'user/userNumber'
     },
     // 使用帮助已读
-    completeHelpRead:{
+    completeHelpRead: {
         method: 'GET',
         url: 'user/completeHelpRead'
     },
     // 获取任务列表数据
-    taskList:{
+    taskList: {
         method: 'GET',
         url: 'task/list'
     },
     // 新增任务
-    addTask:{
+    addTask: {
         method: 'POST',
         url: 'task/add'
     },
     // 更新任务
-    updateTask:{
+    updateTask: {
         method: 'POST',
         url: 'task/update'
     },
     // 任务完成
-    completeTask:{
+    completeTask: {
         method: 'GET',
         url: 'task/complete'
     },
     // 任务转移
-    transfer:{
+    transfer: {
         method: 'GET',
         url: 'task/transfer'
     },
     // 标签列表
-    labelList:{
+    labelList: {
         method: 'POST',
         url: 'label/list'
     },
     // 标签列表带统计
-    labelListAll:{
-        method: 'GET',  
+    labelListAll: {
+        method: 'GET',
         url: 'label/listAll'
     },
     // 添加标签
-    addLabel:{
+    addLabel: {
         method: 'POST',
         url: 'label/add'
     },
     // 修改默认标签
-    updateDefault:{
+    updateDefault: {
         method: 'POST',
         url: 'label/updateDefault'
     },
     // 修改标签
-    updateLabel:{
+    updateLabel: {
         method: 'POST',
         url: 'label/update'
     },
     // 获取默认标签
-    getDefaultLabel:{
+    getDefaultLabel: {
         method: 'POST',
         url: 'label/getDefaultLabel'
     },
     // 标签拖动排序
-    labelSort:{
+    labelSort: {
         method: 'POST',
         url: 'label/sort'
     },
     // 任务拖动排序
-    taskSort:{
+    taskSort: {
         method: 'POST',
         url: 'task/sort'
     },
-    
+    // 版本更新数据
+    edition: {
+        method: 'GET',
+        url: 'other/editionInfo'
+    },
+    // 日常任务新增
+    copyAdd: {
+        method: 'POST',
+        url: 'tmp/add'
+    },
+    // 日常任务列表显示
+    copyTaskList: {
+        method: 'GET',
+        url: 'tmp/list'
+    },
+     // 日常任务列表数据删除
+     copyDel: {
+        method: 'GET',
+        url: 'tmp/del'
+    },
+     // 日常任务列表复制
+     copyTask: {
+        method: 'POST',
+        url: 'tmp/copy'
+    },
 }
 
 /*
@@ -100,7 +127,7 @@ function MyHttp(defaultParams, API_LIST) {
         resource[actionName] = (pdata) => {
             let _params_data = pdata;
             return apiRequest(_build_url + _config.url, _config.method, _params_data, {
-            'token' : store.token
+                'token': store.token
             });
         }
     }

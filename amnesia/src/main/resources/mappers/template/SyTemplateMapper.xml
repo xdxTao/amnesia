@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdx.mapper.template.SyTemplateMapper">
+
+    <resultMap id="BaseResultMap" type="com.xdx.entitys.pojo.SyTemplate">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="label_id" jdbcType="INTEGER" property="labelId" />
+        <result column="tmp_title" jdbcType="VARCHAR" property="tmpTitle" />
+        <result column="tmp_desc" jdbcType="VARCHAR" property="tmpDesc" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_id, label_id, tmp_title, tmp_desc, create_time,modify_time
+  </sql>
+
+    <select id="selectByIds" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT * FROM sy_template
+        WHERE id in
+        <foreach collection="ids" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+</mapper>

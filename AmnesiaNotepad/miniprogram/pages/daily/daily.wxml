@@ -1,0 +1,72 @@
+<view class="main">
+	<view class="head">
+		<!-- 头部标签 -->
+		<view class="labelTotal">
+			<block wx:for="{{labelTotalList}}">
+				<view bindtap="changeLabelTotal" data-labelId="{{item.labelId}}" 
+                    class="{{selectLabelTotalId == item.labelId ? 'labelTotalBox_select' : 'labelTotalBox'}}" 
+                    wx:key="index">{{item.labelName}}
+				</view>
+				<view class="copyButton" data-labelId="{{item.labelId}}" bindtap="copyTask">
+					<image src="../../images/copy_3.png" />
+				</view>
+			</block>
+		</view>
+	</view>
+</view>
+
+<view class="content">
+	<view class="body">
+		<checkbox-group bindchange="checkboxChange">
+			<block wx:for='{{list}}'>
+				<view class="box">
+					<view class="left">
+
+						<checkbox data-id="{{item.id}}" value="{{item.id}}" color="#1296db" checked="{{item.ischeck}}" />
+
+						<text bindtap="seeTaskDesc" data-id="{{item.id}}" data-desc="{{item.tmpDesc}}"
+                            data-labelId="{{item.labelId}}" data-title="{{item.tmpTitle}}">{{item.tmpTitle}} </text>
+					</view>
+					<view class="right">
+						<!--删除按钮-->
+						<view class="del">
+							<image data-id="{{item.id}}" bindtap="delTask" src="../../images/del.png" />
+						</view>
+					</view>
+				</view>
+			</block>
+		</checkbox-group>
+	</view>
+
+</view>
+
+<!-- 添加部分 -->
+<!-- 添加按钮 -->
+<view class="addButton" bindtap="openTask">
+	<image src="../../images/add.png" />
+</view>
+<!-- 弹出窗口 -->
+<view class="addWindow" animation="{{ani}}">
+	<input disabled="{{curSts == 1}}" class="taskInput" value="{{tmpTitle}}" placeholder="任务标题..." bindinput='getTaskInput' />
+	<view class='wrapper'>
+		<view class='toolbar' bindtap="format">
+			<i class="iconfont icon-zitijiacu {{formats.bold ? 'ql-active' : ''}}" data-name="bold"></i>
+			<i class="iconfont icon-zitixieti {{formats.italic ? 'ql-active' : ''}}" data-name="italic"></i>
+			<i class="iconfont icon-zitishanchuxian {{formats.strike ? 'ql-active' : ''}}" data-name="strike"></i>
+			<i class="iconfont icon-outdent" data-name="indent" data-value="-1"></i>
+			<i class="iconfont icon-indent" data-name="indent" data-value="+1"></i>
+			<i class="iconfont icon-fengexian" bindtap="insertDivider"></i>
+		</view>
+		<editor read-only="{{curSts == 1}}" id="editor" class="ql-container" placeholder="任务描述..." bindready="onEditorReady" bindinput='getTaskEditor'>
+		</editor>
+	</view>
+	<view class="taskSubmit">
+		<button wx:if="{{!isEditor}}" type="primary" bindtap="addTask" style="color: #1296db; border:1px #1296db solid;" plain="true">
+			提交
+		</button>
+		<button wx:else type="primary" bindtap="updateTask" style="color: #1296db; border:1px #1296db solid;" plain="true">
+			更新
+		</button>
+		<button type="default" bindtap="closeTask" plain="true">取消</button>
+	</view>
+</view>

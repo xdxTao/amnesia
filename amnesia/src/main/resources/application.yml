@@ -1,6 +1,6 @@
 spring:
     profiles:
-        active: prod
+        active: dev
 
 app:
     name: amesia

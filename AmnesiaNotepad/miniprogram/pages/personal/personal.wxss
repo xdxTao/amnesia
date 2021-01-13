@@ -1,8 +1,9 @@
-.main{
+.main {
 	background-color: #f8f8f8;
 	height: 100vh;
 }
-.head{
+
+.head {
 	height: 13vh;
 	/* border: 1px red solid; */
 	background-color: #fff;
@@ -11,35 +12,41 @@
 	justify-content: flex-start;
 	margin-bottom: 20rpx;
 }
-.head_left{
+
+.head_left {
 	margin-left: 20rpx;
 	width: 120rpx;
 	height: 120rpx;
 }
-.head_left image{
+
+.head_left image {
 	width: 120rpx;
 	height: 120rpx;
 	border-radius: 6px;
 }
-.head_right{
+
+.head_right {
 	width: 80%;
 	height: 120rpx;
 	/* border: 1px red solid; */
 	padding-left: 20rpx;
 }
-.head_right_1{
+
+.head_right_1 {
 	margin-top: 20rpx;
 	height: 50rpx;
 	font-size: 20px;
 	font-weight: 800;
 }
-.head_right_2{
+
+.head_right_2 {
 	margin-top: 10rpx;
 	height: 30rpx;
 	font-size: 14px;
 	color: gainsboro;
 }
-.box{
+
+.box {
 	height: 7vh;
 	font-size: 14px;
 	padding-left: 20px;
@@ -47,54 +54,98 @@
 	background-color: white;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+
 }
-.box_2{
+
+.box_2 {
+	height: 7vh;
+	font-size: 14px;
+	padding-left: 20px;
+	border-bottom: 2rpx #f8f8f8 solid;
+	background-color: white;
+	display: flex;
+	justify-content: space-between;
 	padding-left: 19px;
 }
-.box_left{
+
+.box_left {
 	display: flex;
 	justify-content: flex-start;
+	line-height: 7vh;
+	/* align-items: center; */
+
 }
-.box image{
-	padding-top: 25rpx;
+
+.box_left image {
+	padding-top: 2.3vh;
+	/* vertical-align: middle; */
+	/* top: 50%; */
 	margin-right: 12px;
 	width: 34rpx;
 	height: 34rpx;
 }
-.text{
-	padding-top: 23rpx;
+
+.text {
+	/* padding-top: 23rpx; */
+	/* line-height:7vh; */
 }
-.box_icon image{
-	padding-top: 30rpx;
+
+.box_icon image {
+	/* padding-top: 30rpx; */
+	/* vertical-align: middle !important; */
 	width: 24rpx;
 	height: 24rpx;
+	margin-right: 12px;
+
 }
-.loginMain{
+
+.loginMain {
 	background-color: #fff;
-	height: 100vh; 
+	height: 100vh;
 }
-.login{
+
+.login {
 	display: flex;
 	justify-content: center;
 }
-.loginButton{
+
+.loginButton {
 	margin-top: 200rpx;
 	color: white;
 }
-.loginDesc{
+
+.loginDesc {
 	margin-top: 20rpx;
 	/* border: 1px red solid; */
 	color: gray;
 	text-align: center;
 }
-/* button{
+
+.edition {
+	width: 100%;
+	position: absolute;
+	bottom: 12px;
+	color: gray;
+	text-align: center;
+	opacity:0.6;
+}
+.prefix{
+
+}
+.suffix{
 	font-size: 14px;
-	padding: 0;
-	font-weight: 150;
-	border: 1px white solid;
+	padding-left: 1px;
+}
+
+/* button{
+  font-size: 14px;
+  padding: 0;
+  font-weight: 150;
+  border: 1px white solid;
 } */
-button:not([size='mini']){
+button:not([size='mini']) {
 
 	/* background-color: black; */
 	/* border: 1px white solid; */
-} 
+}

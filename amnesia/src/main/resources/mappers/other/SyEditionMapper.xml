@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdx.mapper.other.SyEditionMapper">
+
+    <resultMap id="BaseResultMap" type="com.xdx.entitys.pojo.SyEdition">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="edition_main" jdbcType="INTEGER" property="editionMain" />
+        <result column="edition_info" jdbcType="VARCHAR" property="editionInfo" />
+        <result column="sup_id" jdbcType="INTEGER" property="supId" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        edition_main,
+        edition_info,
+        sup_id,
+        create_time
+    </sql>
+
+
+
+</mapper>

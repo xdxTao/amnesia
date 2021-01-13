@@ -59,12 +59,18 @@
     /* margin-top: 2%; */
     width: 96%;
     float: left;
+    
     /* border: 1px red solid; */
 }
 
 .left {
     float: left;
     /* border: 1px green solid; */
+    width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
 }
 
 .operator {

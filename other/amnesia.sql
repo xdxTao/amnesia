@@ -1,21 +1,34 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 腾讯MySqL
+ Source Server         : 我的本地
  Source Server Type    : MySQL
- Source Server Version : 50565
- Source Host           : 106.54.142.48:9865
- Source Schema         : tx_amnesia
+ Source Server Version : 50711
+ Source Host           : localhost:3306
+ Source Schema         : amnesia
 
  Target Server Type    : MySQL
- Target Server Version : 50565
+ Target Server Version : 50711
  File Encoding         : 65001
 
- Date: 12/11/2020 19:59:26
+ Date: 13/01/2021 20:01:23
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for sy_edition
+-- ----------------------------
+DROP TABLE IF EXISTS `sy_edition`;
+CREATE TABLE `sy_edition`  (
+  `id` int(6) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `edition_main` int(1) NOT NULL DEFAULT 0 COMMENT '是否是主信息(1 是)',
+  `edition_info` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '版本信息',
+  `sup_id` int(6) NULL DEFAULT NULL COMMENT '父id',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本信息表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for sy_label
@@ -29,7 +42,7 @@ CREATE TABLE `sy_label`  (
   `label_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '是否启用（1，启用，0停用）',
   `label_default` tinyint(3) NOT NULL DEFAULT 0 COMMENT '默认标签（1，默认）',
   PRIMARY KEY (`label_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '标签表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '标签表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for sy_task
@@ -45,9 +58,24 @@ CREATE TABLE `sy_task`  (
   `task_sts` tinyint(1) NOT NULL COMMENT '任务状态（0 未完成，1完成）',
   `task_type` tinyint(1) NOT NULL COMMENT '任务类型（0 今日任务，总任务）',
   `task_del` tinyint(1) NOT NULL COMMENT '是否删除（0 没有删除，1 已经删除）',
-  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`task_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 102 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '任务表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 313 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '任务表' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Table structure for sy_template
+-- ----------------------------
+DROP TABLE IF EXISTS `sy_template`;
+CREATE TABLE `sy_template`  (
+  `id` int(6) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `user_id` int(6) NOT NULL COMMENT '用户id',
+  `label_id` int(6) NOT NULL COMMENT '标签id',
+  `tmp_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '模板标题',
+  `tmp_desc` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '模板描述',
+  `create_time` datetime(0) NOT NULL COMMENT '创建时间',
+  `modify_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '任务模板' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for sy_user
@@ -62,6 +90,6 @@ CREATE TABLE `sy_user`  (
   `user_remarks` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '备注',
   `help_read` int(1) NULL DEFAULT NULL COMMENT '是否阅读使用帮助',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 230 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 385 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;

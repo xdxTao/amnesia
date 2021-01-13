@@ -1,6 +1,6 @@
 import apiRequest from './request.js';
 // 真机测试需要用这个ip
-// const HOST = 'http://127.0.0.1:8082/api/'
+const HOST = 'http://127.0.0.1:8082/api/'
 // const HOST = 'http://192.168.137.143:8082/api/'
 
 import {

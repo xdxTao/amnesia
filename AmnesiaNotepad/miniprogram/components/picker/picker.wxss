@@ -1,0 +1,14 @@
+
+.mask {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, .4);
+    transition: all .4s ease-in-out 0;
+    pointer-events: none;
+    opacity: 1;
+    pointer-events: auto
+}

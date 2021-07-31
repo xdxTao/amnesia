@@ -3,6 +3,9 @@ package com.xdx.common.enums;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+/**
+ * 任务枚举
+ */
 public enum  TaskTypeEnum implements IBaseEnum<Integer, String, TaskTypeEnum> {
     TODAY(0, "今日任务"),
     TOTAL(1, "总任务");

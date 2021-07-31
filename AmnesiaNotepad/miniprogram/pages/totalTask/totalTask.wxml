@@ -6,14 +6,14 @@
     </view>
 </view>
 
-<!-- 空任务 --> 
+<!-- 空任务 -->
 <view class="empty" wx:if="{{labelBox}}">
     <image src="/images/empty.png" />
     生活不简单，尽量简单过。简单生活、慢生活、轻生活，均是一种生活态度，内心富有充盈，生活方能简单从容。
 </view>
 <!-- 数据部分 -->
 <view class="content" wx:else>
-
+    <!-- 被拖动的数据浮动显示 -->
     <movable-area class='movable-area'
         style='display:{{movableViewInfo.showClass}}; height:{{pageInfo.scrollHeight}}%;'>
         <movable-view class="list movable-row " out-of-bounds='true' damping='999'
@@ -27,8 +27,7 @@
                 <view class=".operator">
                     <!-- 拖动按钮 -->
                     <view class="sort">
-                        <image  color='Gray' size='20' 
-                        src="../../images/sort.png"/>
+                        <image color='Gray' size='20' src="../../images/sort.png" />
                     </view>
                     <!-- 切换到任务总览按钮 -->
                     <view class="right">
@@ -39,6 +38,7 @@
             </view>
         </movable-view>
     </movable-area>
+    <!-- 数据显示列表，可拖动其中数据 -->
     <scroll-view scroll-y='{{pageInfo.scrollY}}' style='height: {{pageInfo.scrollHeight}}%'>
         <block wx:for='{{list}}'>
             <view class='list {{pageInfo.readyPlaceIndex == index ? "ready-place" : ""}}'
@@ -54,12 +54,8 @@
                     <view class=".operator">
                         <!-- 拖动按钮 -->
                         <view class="sort">
-                            <image  color='Gray' 
-                            data-index='{{index}}' 
-                            bindtouchstart='dragStart'
-                            bindtouchmove='dragMove'
-                            bindtouchend='dragEnd'
-                            src="../../images/sort.png"/>
+                            <image color='Gray' data-index='{{index}}' bindtouchstart='dragStart'
+                                bindtouchmove='dragMove' bindtouchend='dragEnd' src="../../images/sort.png" />
                         </view>
                         <!-- 切换到任务总览按钮 -->
                         <view class="right">
@@ -71,7 +67,6 @@
             </view>
         </block>
     </scroll-view>
-
 </view>
 
 <!-- 弹出窗口 -->

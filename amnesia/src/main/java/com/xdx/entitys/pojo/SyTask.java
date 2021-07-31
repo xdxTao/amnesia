@@ -1,6 +1,7 @@
 package com.xdx.entitys.pojo;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.xdx.common.enums.TaskTypeEnum;
 import com.xdx.common.enums.YesOrNoStatusEnum;
 import lombok.Data;
@@ -67,4 +68,15 @@ public class SyTask {
      * 创建时间
      */
     private Date createTime;
+
+    /**
+     * 代办通知时间
+     */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
+    private Date taskNoticeTime;
+
+    /**
+     * 通知状态（1 已通知）
+     */
+    private Integer taskNoticeStatus;
 }

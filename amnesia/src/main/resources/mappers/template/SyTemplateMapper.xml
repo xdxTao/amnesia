@@ -10,9 +10,10 @@
         <result column="tmp_desc" jdbcType="VARCHAR" property="tmpDesc" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+        <result column="sort" jdbcType="INTEGER" property="sort" />
     </resultMap>
     <sql id="Base_Column_List">
-    id, user_id, label_id, tmp_title, tmp_desc, create_time,modify_time
+    id, user_id, label_id, tmp_title, tmp_desc, create_time,modify_time,sort
   </sql>
 
     <select id="selectByIds" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -21,5 +22,6 @@
         <foreach collection="ids" item="item" open="(" close=")" separator=",">
             #{item}
         </foreach>
+        ORDER BY sort
     </select>
 </mapper>

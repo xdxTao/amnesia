@@ -23,7 +23,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/amnesia?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/amnesia?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
     dbcp2:
@@ -44,10 +44,15 @@ logging:
 
 # 微信小程序数据
 wx:
-  appid: 
-  secret: 
+  appid: wx1a39331e85e08267
+  secret: c2799cc897a8bd8011474034fa20d685
   grantType: authorization_code
   loginUrl: https://api.weixin.qq.com/sns/jscode2session
   # 文字校验
   msgSecCheck: https://api.weixin.qq.com/wxa/msg_sec_check?access_token=
+
+# 微信消息模板
+msg-tmpl:
+  # 代办提醒
+  todo: IAVbn0mLYfsBhfHfvyfYg-exlI0gFmWGilU0u85ghJE
 

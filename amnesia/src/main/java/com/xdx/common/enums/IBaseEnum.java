@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * 枚举父类
+ */
 public interface IBaseEnum<K, V, T extends Enum<?>> {
     Map<Class<?>, Map<?, ?>> map = new LinkedHashMap();
 

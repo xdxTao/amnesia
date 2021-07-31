@@ -21,7 +21,7 @@ public class WebAppConfig implements WebMvcConfigurer {
         return new LoginInterceptor();
     }
 
-        // 多个拦截器组成一个拦截器链
+    // 多个拦截器组成一个拦截器链
     // addPathPatterns 用于添加拦截规则
     // excludePathPatterns 用户排除拦截
     @Override

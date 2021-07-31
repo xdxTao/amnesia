@@ -44,7 +44,7 @@ public class MyCommonService {
             user = userMapper.selectOne(new SyUser().setWxOpenId(getToken()));
             userMap.put(user.getWxOpenId(), user);
         }
-        if (userMap.size() > 1000){
+        if (userMap.size() > 10000){
             userMap.clear();
         }
         return user;

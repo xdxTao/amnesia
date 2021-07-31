@@ -52,4 +52,9 @@ public class SyUser  {
      */
     private Integer helpRead;
 
+    /**
+     * 通知管理
+     */
+    private String msgNotice;
+
 }

@@ -3,9 +3,9 @@
 		<!-- 头部标签 -->
 		<view class="labelTotal">
 			<block wx:for="{{labelTotalList}}">
-				<view bindtap="changeLabelTotal" data-labelId="{{item.labelId}}" 
-                    class="{{selectLabelTotalId == item.labelId ? 'labelTotalBox_select' : 'labelTotalBox'}}" 
-                    wx:key="index">{{item.labelName}}
+				<view bindtap="changeLabelTotal" data-labelId="{{item.labelId}}"
+					class="{{selectLabelTotalId == item.labelId ? 'labelTotalBox_select' : 'labelTotalBox'}}"
+					wx:key="index">{{item.labelName}}
 				</view>
 				<view class="copyButton" data-labelId="{{item.labelId}}" bindtap="copyTask">
 					<image src="../../images/copy_3.png" />
@@ -18,23 +18,76 @@
 <view class="content">
 	<view class="body">
 		<checkbox-group bindchange="checkboxChange">
-			<block wx:for='{{list}}'>
+			<!-- 被拖动的数据浮动显示 -->
+			<movable-area class='movable-area'
+				style='display:{{movableViewInfo.showClass}}; height:{{pageInfo.scrollHeight}}%;'>
+				<movable-view class="list movable-row " out-of-bounds='true' damping='999'
+					style='width: 100%; height:{{pageInfo.rowHeight}}px;' direction="vertical"
+					y="{{movableViewInfo.y}}">
+					<view class="box">
+						<view class="left">
+							<checkbox data-id="{{item.id}}" value="{{item.id}}" color="#1296db"
+								checked="{{item.ischeck}}" />
+							<text bindtap="seeTaskDesc" data-id="{{item.id}}" data-desc="{{item.tmpDesc}}"
+								data-labelId="{{item.labelId}}" data-title="{{item.tmpTitle}}">{{movableViewInfo.data.tmpTitle}} </text>
+						</view>
+						<view class=".operator">
+							<!-- 拖动按钮 -->
+							<view class="sort">
+								<image color='Gray' src="../../images/sort.png" />
+							</view>
+							<!-- 删除按钮 -->
+							<view class="del">
+								<image data-id="{{item.id}}" bindtap="delTask" src="../../images/del.png" />
+							</view>
+						</view>
+					</view>
+				</movable-view>
+			</movable-area>
+			<!-- 数据显示列表，可拖动其中数据 -->
+			<scroll-view scroll-y='{{pageInfo.scrollY}}' style='height: {{pageInfo.scrollHeight}}%'>
+				<block wx:for='{{list}}'>
+					<view class='list {{pageInfo.readyPlaceIndex == index ? "ready-place" : ""}}'
+						style='height: {{pageInfo.rowHeight}}px;'>
+						<view class="box">
+							<view class="left">
+								<checkbox data-id="{{item.id}}" value="{{item.id}}" color="#1296db"
+									checked="{{item.ischeck}}" />
+								<text bindtap="seeTaskDesc" data-id="{{item.id}}" data-desc="{{item.tmpDesc}}"
+									data-labelId="{{item.labelId}}" data-title="{{item.tmpTitle}}">{{item.tmpTitle}}
+								</text>
+							</view>
+							<view class="operator">
+								<!-- 拖动按钮 -->
+								<view class="sort">
+									<image color='Gray' data-index='{{index}}' bindtouchstart='dragStart'
+										bindtouchmove='dragMove' bindtouchend='dragEnd' src="../../images/sort.png" />
+								</view>
+								<!--删除按钮-->
+								<view class="del">
+									<image data-id="{{item.id}}" bindtap="delTask" src="../../images/del.png" />
+								</view>
+							</view>
+						</view>
+					</view>
+				</block>
+			</scroll-view>
+			<!-- <block wx:for='{{list}}'>
 				<view class="box">
 					<view class="left">
-
-						<checkbox data-id="{{item.id}}" value="{{item.id}}" color="#1296db" checked="{{item.ischeck}}" />
-
+						<checkbox data-id="{{item.id}}" value="{{item.id}}" color="#1296db"
+							checked="{{item.ischeck}}" />
 						<text bindtap="seeTaskDesc" data-id="{{item.id}}" data-desc="{{item.tmpDesc}}"
-                            data-labelId="{{item.labelId}}" data-title="{{item.tmpTitle}}">{{item.tmpTitle}} </text>
+							data-labelId="{{item.labelId}}" data-title="{{item.tmpTitle}}">{{item.tmpTitle}} </text>
 					</view>
-					<view class="right">
-						<!--删除按钮-->
-						<view class="del">
+					<view class="right"> -->
+						<!-- 删除按钮 -->
+						<!-- <view class="del">
 							<image data-id="{{item.id}}" bindtap="delTask" src="../../images/del.png" />
 						</view>
 					</view>
 				</view>
-			</block>
+			</block> -->
 		</checkbox-group>
 	</view>
 
@@ -47,7 +100,8 @@
 </view>
 <!-- 弹出窗口 -->
 <view class="addWindow" animation="{{ani}}">
-	<input disabled="{{curSts == 1}}" class="taskInput" value="{{tmpTitle}}" placeholder="任务标题..." bindinput='getTaskInput' />
+	<input disabled="{{curSts == 1}}" class="taskInput" value="{{tmpTitle}}" placeholder="任务标题..."
+		bindinput='getTaskInput' />
 	<view class='wrapper'>
 		<view class='toolbar' bindtap="format">
 			<i class="iconfont icon-zitijiacu {{formats.bold ? 'ql-active' : ''}}" data-name="bold"></i>
@@ -57,14 +111,17 @@
 			<i class="iconfont icon-indent" data-name="indent" data-value="+1"></i>
 			<i class="iconfont icon-fengexian" bindtap="insertDivider"></i>
 		</view>
-		<editor read-only="{{curSts == 1}}" id="editor" class="ql-container" placeholder="任务描述..." bindready="onEditorReady" bindinput='getTaskEditor'>
+		<editor read-only="{{curSts == 1}}" id="editor" class="ql-container" placeholder="任务描述..."
+			bindready="onEditorReady" bindinput='getTaskEditor'>
 		</editor>
 	</view>
 	<view class="taskSubmit">
-		<button wx:if="{{!isEditor}}" type="primary" bindtap="addTask" style="color: #1296db; border:1px #1296db solid;" plain="true">
+		<button wx:if="{{!isEditor}}" type="primary" bindtap="addTask" style="color: #1296db; border:1px #1296db solid;"
+			plain="true">
 			提交
 		</button>
-		<button wx:else type="primary" bindtap="updateTask" style="color: #1296db; border:1px #1296db solid;" plain="true">
+		<button wx:else type="primary" bindtap="updateTask" style="color: #1296db; border:1px #1296db solid;"
+			plain="true">
 			更新
 		</button>
 		<button type="default" bindtap="closeTask" plain="true">取消</button>

@@ -5,6 +5,9 @@ import com.xdx.entitys.pojo.SyTask;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+import java.util.Map;
+
 @Mapper
 public interface SyTaskMapper extends MyBaseMapper<SyTask> {
 
@@ -25,4 +28,11 @@ public interface SyTaskMapper extends MyBaseMapper<SyTask> {
      */
     void changeTask();
 
+    List<Map<String,String>> selectTodo();
+
+    /**
+     * 更新通知时间和状态为 null
+     * @param taskId
+     */
+    void updateNoticeByNull(@Param("taskId") Integer taskId);
 }

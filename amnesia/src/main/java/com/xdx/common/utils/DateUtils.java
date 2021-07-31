@@ -1,6 +1,10 @@
 package com.xdx.common.utils;
 
+import org.springframework.util.Assert;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * 时间相关工具类
@@ -30,5 +34,14 @@ public class DateUtils {
     public static int getDay() {
         Calendar calendar = Calendar.getInstance();
         return calendar.get(Calendar.DAY_OF_MONTH);
+    }
+
+    /**
+     * 格式化日期
+     */
+    public static String parseDate(Date date, String pattern) {
+        Assert.notNull(date, "date must not be null");
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        return sdf.format(date);
     }
 }

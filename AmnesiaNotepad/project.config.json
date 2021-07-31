@@ -1,113 +1,112 @@
 {
-	"miniprogramRoot": "miniprogram/",
-	"cloudfunctionRoot": "cloudfunctions/",
-	"setting": {
-		"urlCheck": false,
-		"scopeDataCheck": false,
-		"coverView": true,
-		"es6": true,
-		"postcss": true,
-		"compileHotReLoad": false,
-		"preloadBackgroundData": false,
-		"minified": true,
-		"autoAudits": false,
-		"newFeature": true,
-		"uglifyFileName": false,
-		"uploadWithSourceMap": true,
-		"useIsolateContext": true,
-		"nodeModules": true,
-		"enhance": true,
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false,
-		"showShadowRootInWxmlPanel": true,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		},
-		"useMultiFrameRuntime": false,
-		"useApiHook": true,
-		"packNpmManually": false,
-		"packNpmRelationList": []
-	},
-	"appid": "wx1a39331e85e08267",
-	"projectname": "AmnesiaNotepad",
-	"libVersion": "2.8.1",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"list": []
-		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": 0,
-			"list": [
-				{
-					"id": -1,
-					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "pages/personal/personal",
-					"pathName": "pages/personal/personal",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/author/author",
-					"pathName": "pages/author/author",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/about/about",
-					"pathName": "pages/about/about",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/help/help",
-					"pathName": "pages/help/help",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/totalTask/totalTask",
-					"pathName": "pages/totalTask/totalTask",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/label/label",
-					"pathName": "pages/label/label",
-					"scene": null
-				}
-			]
-		}
-	}
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "bundle": false,
+    "useIsolateContext": true,
+    "useCompilerModule": false,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "useApiHostProcess": false
+  },
+  "appid": "wx1a39331e85e08267",
+  "projectname": "AmnesiaNotepad",
+  "libVersion": "2.8.1",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": -1,
+          "name": "db guide",
+          "pathName": "pages/databaseGuide/databaseGuide",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "pages/personal/personal",
+          "pathName": "pages/personal/personal",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/author/author",
+          "pathName": "pages/author/author",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/about/about",
+          "pathName": "pages/about/about",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/help/help",
+          "pathName": "pages/help/help",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/totalTask/totalTask",
+          "pathName": "pages/totalTask/totalTask",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/label/label",
+          "pathName": "pages/label/label",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

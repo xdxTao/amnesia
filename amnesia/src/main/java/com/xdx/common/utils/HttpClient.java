@@ -79,4 +79,26 @@ public class HttpClient {
         }
     }
 
+    public static String post2(String url,Map<String,Object> params) throws Exception{
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost(url);
+        httpPost.addHeader("Content-type","application/json; charset=utf-8");
+        httpPost.setHeader("Accept", "application/json");
+        if (params != null && params.size() > 0){
+            StringEntity stringEntity = new StringEntity(JsonUtils.objectToJson(params),"utf-8");
+            httpPost.setEntity(stringEntity);
+        }
+        CloseableHttpResponse response = null;
+        try {
+            // 执行请求
+            response = httpclient.execute(httpPost);
+            return EntityUtils.toString(response.getEntity(), "UTF-8");
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+            httpclient.close();
+        }
+    }
+
 }

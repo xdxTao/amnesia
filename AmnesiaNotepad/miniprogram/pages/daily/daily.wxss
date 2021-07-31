@@ -83,15 +83,32 @@
     
 }
 
+.movable-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    /* border: 1px blue solid; */
+}
+
+.movable-row {
+    box-shadow: #D9D9D9 0px 0px 20px;
+    width: 100%;
+}
 .box {
     /* margin-top: 2%; */
     width: 96%;
     margin-left: 3%;
+
     float: left;
     /* border: 1px red solid; */
     display: flex;
     flex-direction: row;
     text-align: center;
+
+    width: 96%;
+    float: left;
 
 }
 
@@ -106,13 +123,44 @@
     flex-direction: row;
 
 }
-
-.del {
-    width: 11%;
+.operator {
+    width: 16%;
     /* padding-left: 3%; */
     float: right;
+    padding-right: 30rpx;
     /* border: 1px blue solid; */
     /* height: 100%; */
+    display: flex;
+    justify-content: center;
+}
+/* 拖动排序 */
+.sort {
+    width: 50%;
+    height: 100%;
+    /* border: 1px red solid; */
+
+}
+
+.sort image {
+    width: 42rpx;
+    height: 42rpx;
+    padding-left: 5rpx;
+    margin-top: 10rpx;
+    /* border: 1px green solid; */
+
+}
+.del {
+    /* width: 11%; */
+    /* padding-left: 3%; */
+    /* float: right;
+    border: 1px blue solid; */
+    /* height: 100%; */
+
+    width: 33rpx;
+    padding-left: 20rpx;
+    height: 33rpx;
+    /* border: 1px blue solid; */
+
 }
 
 .del image {
@@ -120,7 +168,7 @@
     height: 38rpx;
     padding-left: 5rpx;
     margin-top: 10rpx;
-    /* border: 1px blue solid; */
+    /* border: 1px yellow solid; */
 
 }
 

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.xdx.common.common.AjaxResult;
 import com.xdx.common.utils.CheckParams;
 import com.xdx.common.utils.JsonUtils;
-import com.xdx.common.utils.Tools;
+import com.xdx.common.utils.wx.Tools;
 import com.xdx.entitys.pojo.SyLabel;
 import com.xdx.service.label.SyLabelService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,7 +3,7 @@ package com.xdx.controller.task;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.xdx.common.common.AjaxResult;
 import com.xdx.common.utils.JsonUtils;
-import com.xdx.common.utils.Tools;
+import com.xdx.common.utils.wx.Tools;
 import com.xdx.entitys.pojo.SyTask;
 import com.xdx.service.task.SyTaskService;
 import org.springframework.beans.factory.annotation.Autowired;

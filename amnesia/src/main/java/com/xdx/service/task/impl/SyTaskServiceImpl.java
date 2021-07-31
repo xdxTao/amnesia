@@ -6,6 +6,7 @@ import com.xdx.common.enums.TaskTypeEnum;
 import com.xdx.common.enums.YesOrNoStatusEnum;
 import com.xdx.entitys.pojo.SyTask;
 import com.xdx.mapper.task.SyTaskMapper;
+import com.xdx.mapper.user.SyUserMapper;
 import com.xdx.service.task.SyTaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,9 +25,11 @@ public class SyTaskServiceImpl extends MyCommonService implements SyTaskService 
     @Autowired
     private SyTaskMapper taskMapper;
 
+    @Autowired
+    private SyUserMapper userMapper;
+
     @Override
     public AjaxResult<?> add(SyTask task) {
-
         task.setTaskDel(YesOrNoStatusEnum.NO);
         task.setCreateTime(new Date());
         task.setTaskSts(YesOrNoStatusEnum.NO);
@@ -64,6 +67,13 @@ public class SyTaskServiceImpl extends MyCommonService implements SyTaskService 
      */
     @Override
     public AjaxResult<?> update(SyTask task){
+        // 判断是否修改过时间
+        SyTask tmp = taskMapper.selectById(task.getTaskId());
+        if (task.getTaskNoticeTime() == null ||
+                tmp.getTaskNoticeTime() == null ||
+                task.getTaskNoticeTime().getTime() != tmp.getTaskNoticeTime().getTime()) {
+            taskMapper.updateNoticeByNull(task.getTaskId());
+        }
         taskMapper.updateById(task);
         return AjaxResult.success("更新成功");
     }
@@ -110,4 +120,17 @@ public class SyTaskServiceImpl extends MyCommonService implements SyTaskService 
         }
         return AjaxResult.success("操作完成");
     }
+
+    /**
+     * 判断是否开启消息提示
+     *
+     * @param userId 用户id
+     * @param  msgId 消息id
+     */
+    private boolean chechMsg(String userId, String msgId){
+        int i = userMapper.chechMsg(userId, msgId);
+
+        return userMapper.chechMsg(userId, msgId) > 0;
+    }
+
 }

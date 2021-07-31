@@ -4,6 +4,7 @@ import com.xdx.common.common.AjaxResult;
 import com.xdx.common.common.MyCommonService;
 import com.xdx.common.enums.TaskTypeEnum;
 import com.xdx.common.enums.YesOrNoStatusEnum;
+import com.xdx.entitys.pojo.SyLabel;
 import com.xdx.entitys.pojo.SyTask;
 import com.xdx.entitys.pojo.SyTemplate;
 import com.xdx.mapper.task.SyTaskMapper;
@@ -49,7 +50,7 @@ public class TmpServiceImpl extends MyCommonService implements TmpService {
     public AjaxResult<?> list(Integer labelId) {
         SyTemplate tmp = new SyTemplate();
         tmp.setLabelId(labelId);
-        List<SyTemplate> syTemplates = tmpMapper.selectList(tmp);
+        List<SyTemplate> syTemplates = tmpMapper.selectList(tmp,"asc","sort");
         return AjaxResult.success(syTemplates);
     }
 
@@ -76,5 +77,18 @@ public class TmpServiceImpl extends MyCommonService implements TmpService {
             taskMapper.insert(task);
         }
         return AjaxResult.success("复制成功");
+    }
+
+    @Override
+    public AjaxResult<?> sort(List<SyTemplate> syTemplates) {
+
+        SyTemplate update = new SyTemplate();
+        int i = 1;
+        for (SyTemplate item : syTemplates){
+            update.setId(item.getId());
+            update.setSort(i++);
+            tmpMapper.updateById(update);
+        }
+        return AjaxResult.success("操作完成");
     }
 }

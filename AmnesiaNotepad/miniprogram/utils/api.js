@@ -1,7 +1,9 @@
 import apiRequest from './request.js';
+// const HOST = 'http://127.0.0.1:8082/api/';
+// const HOST = 'https://tx.amnesia.xdx97.com:8082/api/'; 
 // 真机测试需要用这个ip
-const HOST = 'http://127.0.0.1:8082/api/'
-// const HOST = 'http://192.168.137.143:8082/api/'
+// const HOST = 'http://127.0.0.1:8082/api/'
+const HOST = 'http://192.168.2.5:8082/api/'
 
 import {
     store
@@ -82,7 +84,7 @@ const API_LIST = {
         method: 'POST',
         url: 'label/sort'
     },
-    // 任务拖动排序
+    // 每日任务拖动排序
     taskSort: {
         method: 'POST',
         url: 'task/sort'
@@ -111,6 +113,11 @@ const API_LIST = {
      copyTask: {
         method: 'POST',
         url: 'tmp/copy'
+    },
+    // 日常任务拖动排序
+    dailySort: {
+        method: 'POST',
+        url: 'tmp/sort'
     },
 }
 

@@ -3,6 +3,9 @@ package com.xdx.common.enums;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+/**
+ * 是否枚举
+ */
 public enum YesOrNoStatusEnum implements IBaseEnum<Integer, String, YesOrNoStatusEnum> {
     NO(0, "否"),
     YES(1, "是");

@@ -10,6 +10,7 @@
         <result column="gender" jdbcType="TINYINT" property="gender" />
         <result column="user_remarks" jdbcType="VARCHAR" property="userRemarks" />
         <result column="help_read" jdbcType="INTEGER" property="helpRead" />
+        <result column="msg_notice" jdbcType="VARCHAR" property="msgNotice" />
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -19,9 +20,14 @@
         is_authorize,
         gender,
         user_remarks,
-        help_read
+        help_read,
+        msg_notice
     </sql>
 
-
-
+    <select id="chechMsg" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM sy_user
+        WHERE user_id = #{userId}
+        AND msg_notice LIKE CONCAT('%',#{msgId},'%')
+    </select>
 </mapper>

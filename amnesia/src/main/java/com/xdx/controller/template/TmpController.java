@@ -3,6 +3,7 @@ package com.xdx.controller.template;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.xdx.common.common.AjaxResult;
 import com.xdx.common.utils.JsonUtils;
+import com.xdx.entitys.pojo.SyLabel;
 import com.xdx.entitys.pojo.SyTemplate;
 import com.xdx.service.tmplate.TmpService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,5 +87,15 @@ public class TmpController {
             return AjaxResult.failure("参数异常");
         }
         return tmpService.copy(ids);
+    }
+
+    /**
+     * 模板排序
+     */
+    @PostMapping("/tmp/sort")
+    public AjaxResult<?> sort(@RequestBody Object sortList){
+        JsonNode jsonNode = JsonUtils.stringToJsonNode(JsonUtils.objectToJson(sortList));
+        List<SyTemplate> syTemplates = JsonUtils.objectToList(jsonNode.get("sortList"), SyTemplate.class);
+        return tmpService.sort(syTemplates);
     }
 }
